@@ -40,10 +40,11 @@ nav a {
     padding: 20px; /* Add space inside the main section */
     border-radius: 10px; /* Rounded corners */
     text-align: center; /* Center text */
-    max-width: 600px; /* Limit width */
-    margin: 20px auto; /* Center horizontally */
+    width: 100%; /* Full width */
+    max-width: 100%; /* Ensure it doesn't exceed the viewport */
+    margin: 0 auto; /* Center horizontally */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-     border: 2px solid #2c3e50; /* Dark blue-gray border */
+    border: 2px solid #2c3e50; /* Dark blue-gray border */
 }
 
 .content h2 {
@@ -55,7 +56,10 @@ nav a {
     color: #666; /* Medium gray for paragraph text */
     font-size: 16px; /* Adjust font size */
     line-height: 1.5; /* Improve readability */
+    max-width: 80%; /* Limit text width for better readability */
+    margin: 0 auto; /* Center text */
 }
+
 
 .sections {
     display: flex; /* Enables side-by-side layout */
