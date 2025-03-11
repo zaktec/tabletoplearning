@@ -34,6 +34,28 @@ nav a {
 }
 
 /* Main Content Section Styling */
+
+content {
+    background-color: #f9f9f9; /* Light gray background */
+    padding: 20px; /* Add space inside the main section */
+    border-radius: 10px; /* Rounded corners */
+    text-align: center; /* Center text */
+    max-width: 600px; /* Limit width */
+    margin: 20px auto; /* Center horizontally */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+content h2 {
+    color: #333; /* Dark gray color for heading */
+    font-size: 24px; /* Adjust font size */
+}
+
+content p {
+    color: #666; /* Medium gray for paragraph text */
+    font-size: 16px; /* Adjust font size */
+    line-height: 1.5; /* Improve readability */
+}
+
 .sections {
     display: flex; /* Enables side-by-side layout */
     justify-content: space-around; /* Spaces sections evenly */
