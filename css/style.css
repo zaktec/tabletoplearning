@@ -43,6 +43,7 @@ content {
     max-width: 600px; /* Limit width */
     margin: 20px auto; /* Center horizontally */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+     border: 2px solid #2c3e50; /* Dark blue-gray border */
 }
 
 content h2 {
