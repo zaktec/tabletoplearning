@@ -30,7 +30,13 @@
      <div class="content"> 
              <h1>Content</h1> <!-- Main  content section -->
              <p>This is the main content area where information is displayed.</p> <!-- Short description of the page -->
-          <h2>Simple Name Validation</h2>
+          <div class="container">
+        <h4>Enter Name</h4>
+        <form name="myForm" onsubmit="return validateForm()">
+            <input type="text" name="name" placeholder="Your Name">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
    
          </div>
     <!-- Footer Section -->
