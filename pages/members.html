@@ -12,6 +12,35 @@
     <header>
         <h1>Website Header</h1> <!-- Main title of the website -->
         <img src="../images/logo.png" alt="Logo" class="logo"> <!-- Displays a logo image aligned to the right -->
+
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <script>
+        function validateForm() {
+            let name = document.forms["myForm"]["name"].value;
+            
+            if (name.trim() === "") {
+                alert("Name field cannot be empty");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h2>Simple Name Validation</h2>
+    <form name="myForm" onsubmit="return validateForm()">
+        Name: <input type="text" name="name"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
+
     </header>
 
     <!-- Navigation Bar -->
