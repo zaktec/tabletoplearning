@@ -1,0 +1,37 @@
+---
+import '../styles/global.css';
+
+const { title = 'Tabletoplearning' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Tabletoplearning brings hands-on digital learning experiences to students and communities." />
+    <title>{title} | Tabletoplearning</title>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/">
+        <span class="brand-text">Tabletoplearning</span>
+      </a>
+      <nav class="nav-links">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/courses">Courses</a>
+        <a href="/events">Events</a>
+        <a class="login-link" href="/login">Login</a>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="footer">
+      <p>© 2026 Tabletoplearning. Learning that feels alive.</p>
+    </footer>
+  </body>
+</html>

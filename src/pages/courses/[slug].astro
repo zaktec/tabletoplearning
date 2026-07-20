@@ -1,0 +1,111 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const courseData = {
+  mathematics: {
+    title: 'Mathematics',
+    blurb: 'Algebra, geometry, calculus, and exam-ready problem solving.',
+    features: ['Structured lessons', 'Step-by-step explanations', 'Practice questions and revision']
+  },
+  english: {
+    title: 'English',
+    blurb: 'Reading, writing, grammar, and literature support for confident learners.',
+    features: ['Essay planning', 'Grammar correction', 'Reading comprehension practice']
+  },
+  languages: {
+    title: 'Languages',
+    blurb: 'Build speaking and writing confidence in Arabic, French, and Spanish.',
+    features: ['Conversation practice', 'Vocabulary building', 'Writing support']
+  },
+  biology: {
+    title: 'Biology',
+    blurb: 'Explore cells, ecology, genetics, and scientific thinking.',
+    features: ['Topic-based lessons', 'Visual explanations', 'Exam-style review']
+  },
+  'ai-machine-learning': {
+    title: 'AI & Machine Learning',
+    blurb: 'A modern pathway into neural networks, data concepts, and AI foundations.',
+    features: ['Practical AI concepts', 'Hands-on examples', 'Beginner-friendly structure']
+  },
+  'computer-science': {
+    title: 'Computer Science',
+    blurb: 'Learn programming, logic, and problem solving with hands-on guidance.',
+    features: ['Programming practice', 'Algorithms and data structures', 'Debugging support']
+  },
+  physics: {
+    title: 'Physics',
+    blurb: 'Understand energy, motion, forces, and real-world scientific ideas.',
+    features: ['Concept explanations', 'Worked examples', 'Revision checkpoints']
+  },
+  chemistry: {
+    title: 'Chemistry',
+    blurb: 'Support for core concepts, practical chemistry, and exam preparation.',
+    features: ['Reaction and formula support', 'Experiment guidance', 'Revision plans']
+  },
+  'foundations-course': {
+    title: 'Foundations Course',
+    blurb: 'Start with clear, structured lessons and guided practice.',
+    features: ['Beginner-friendly lessons', 'Confidence-building tasks', 'Progress check-ins']
+  },
+  'exam-prep-mastery': {
+    title: 'Exam Prep Mastery',
+    blurb: 'Focus your revision with structured exam preparation and feedback.',
+    features: ['Exam-style questions', 'Revision planning', 'Confidence coaching']
+  },
+  'interactive-practice-lab': {
+    title: 'Interactive Practice Lab',
+    blurb: 'Strengthen skills through questions, feedback, and practical exercises.',
+    features: ['Interactive practice', 'Instant feedback', 'Skill-building sessions']
+  },
+  'advanced-learning-track': {
+    title: 'Advanced Learning Track',
+    blurb: 'Take your learning further with deeper topics and specialist support.',
+    features: ['Advanced lessons', 'Tutor support', 'Challenge-based growth']
+  }
+};
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: 'mathematics' } },
+    { params: { slug: 'english' } },
+    { params: { slug: 'languages' } },
+    { params: { slug: 'biology' } },
+    { params: { slug: 'ai-machine-learning' } },
+    { params: { slug: 'computer-science' } },
+    { params: { slug: 'physics' } },
+    { params: { slug: 'chemistry' } },
+    { params: { slug: 'foundations-course' } },
+    { params: { slug: 'exam-prep-mastery' } },
+    { params: { slug: 'interactive-practice-lab' } },
+    { params: { slug: 'advanced-learning-track' } }
+  ];
+}
+
+const { slug } = Astro.params;
+const course = slug ? courseData[slug] : undefined;
+---
+
+<Layout title={course?.title ?? 'Course'}>
+  <section class="section">
+    {course ? (
+      <div class="card" style="max-width: 760px; margin: 0 auto;">
+        <p class="eyebrow">Course page</p>
+        <h2>{course.title}</h2>
+        <p>{course.blurb}</p>
+        <ul>
+          {course.features.map((feature) => <li>{feature}</li>)}
+        </ul>
+        <div class="actions">
+          <a class="button primary" href="/courses">Back to all courses</a>
+          <a class="button secondary" href="#subjects">Choose another subject</a>
+        </div>
+      </div>
+    ) : (
+      <div class="card" style="max-width: 760px; margin: 0 auto;">
+        <h2>Course not found</h2>
+        <p>The requested course could not be found.</p>
+        <a class="button primary" href="/courses">Browse courses</a>
+      </div>
+    )}
+  </section>
+</Layout>

@@ -1,0 +1,160 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Home">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Human tutors + AI-powered learning</p>
+      <h1>Excel in your subject with guided support that feels personal.</h1>
+      <p>
+        Choose your subject, explore expert-led courses, and learn through structured lessons,
+        progress tracking, and interactive practice designed for real results.
+      </p>
+      <div class="actions">
+        <a class="button primary" href="#subjects">Choose a subject</a>
+        <a class="button secondary" href="#courses">View all courses</a>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <h3>Why learners choose us</h3>
+      <ul>
+        <li>Personalized learning paths</li>
+        <li>Support from expert tutors</li>
+        <li>Track progress and build confidence</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="subjects" class="section">
+    <h2>Choose your subject</h2>
+    <div class="card-grid subject-grid">
+      <a class="card" href="/courses/mathematics">
+        <h3>📐 Mathematics</h3>
+        <p>Algebra, geometry, calculus, and exam preparation.</p>
+      </a>
+      <a class="card" href="/courses/english">
+        <h3>📚 English</h3>
+        <p>Grammar, literature, writing skills, and reading confidence.</p>
+      </a>
+      <a class="card" href="/courses/languages">
+        <h3>🗣️ Languages</h3>
+        <p>Arabic, French, Spanish, and conversation-focused learning.</p>
+      </a>
+      <a class="card" href="/courses/biology">
+        <h3>🧬 Biology</h3>
+        <p>Cells, genetics, ecology, and scientific understanding.</p>
+      </a>
+      <a class="card" href="/courses/ai-machine-learning">
+        <h3>🤖 AI & Machine Learning</h3>
+        <p>Foundations of AI, neural networks, and practical applications.</p>
+      </a>
+      <a class="card" href="/courses/computer-science">
+        <h3>💻 Computer Science</h3>
+        <p>Programming, algorithms, data structures, and problem solving.</p>
+      </a>
+      <a class="card" href="/courses/physics">
+        <h3>⚛️ Physics</h3>
+        <p>Mechanics, energy, waves, and scientific reasoning.</p>
+      </a>
+      <a class="card" href="/courses/chemistry">
+        <h3>🧪 Chemistry</h3>
+        <p>Core concepts, lab skills, and exam-ready practice.</p>
+      </a>
+    </div>
+  </section>
+
+  <section id="courses" class="section">
+    <h2>All courses</h2>
+    <div class="card-grid">
+      <a class="card" href="/courses/foundations-course">
+        <h3>Foundations Course</h3>
+        <p>Build a strong base with beginner-friendly lessons and guided practice.</p>
+      </a>
+      <a class="card" href="/courses/exam-prep-mastery">
+        <h3>Exam Prep Mastery</h3>
+        <p>Prepare for assessments with focused revision and step-by-step coaching.</p>
+      </a>
+      <a class="card" href="/courses/interactive-practice-lab">
+        <h3>Interactive Practice Lab</h3>
+        <p>Strengthen skills through exercises, instant feedback, and quizzes.</p>
+      </a>
+      <a class="card" href="/courses/advanced-learning-track">
+        <h3>Advanced Learning Track</h3>
+        <p>Go deeper into complex topics with structured support and mentor feedback.</p>
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>What our students say</h2>
+    <div class="card-grid testimonial-grid">
+      <div class="card testimonial">
+        <p>“HAi-BL transformed my understanding of calculus and gave me the confidence to improve fast.”</p>
+        <strong>Sarah M.</strong>
+      </div>
+      <div class="card testimonial">
+        <p>“The personalized path helped me boost my grades and stay motivated throughout the term.”</p>
+        <strong>James L.</strong>
+      </div>
+      <div class="card testimonial">
+        <p>“As a tutor, I can now see progress clearly and guide students with better insight.”</p>
+        <strong>Dr. Emily R.</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Choose your monthly support level</h2>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <p class="pricing-label">Bronze</p>
+        <h3>Course Access</h3>
+        <p class="price">£19<span>/month</span></p>
+        <ul>
+          <li>One selected course or pathway level</li>
+          <li>Weekly lesson release</li>
+          <li>Worksheets and practice tasks</li>
+          <li>Tutor-monitored progress</li>
+        </ul>
+        <a class="button secondary" href="/courses">Explore Bronze</a>
+      </div>
+
+      <div class="pricing-card featured">
+        <p class="pricing-label">Silver</p>
+        <h3>Guided Support</h3>
+        <p class="price">£49<span>/month</span></p>
+        <ul>
+          <li>Everything in Bronze</li>
+          <li>1 live lesson each month</li>
+          <li>Personalised practice after lessons</li>
+          <li>Progress guidance from your tutor</li>
+        </ul>
+        <a class="button primary" href="/courses">Explore Silver</a>
+      </div>
+
+      <div class="pricing-card">
+        <p class="pricing-label">Gold</p>
+        <h3>Regular Support</h3>
+        <p class="price">£89<span>/month</span></p>
+        <ul>
+          <li>Everything in Silver</li>
+          <li>2 live lessons each month</li>
+          <li>More regular tutor guidance</li>
+          <li>Ideal for exam preparation</li>
+        </ul>
+        <a class="button secondary" href="/courses">Explore Gold</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta-section">
+    <h2>Ready to transform your learning?</h2>
+    <p>Join thousands of learners already building confidence with expert support and smart guidance.</p>
+    <div class="actions">
+      <a class="button primary" href="#subjects">Get started</a>
+      <a class="button secondary" href="/about">Learn more</a>
+    </div>
+  </section>
+</Layout>
