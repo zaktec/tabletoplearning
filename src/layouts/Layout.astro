@@ -2,6 +2,7 @@
 import '../styles/global.css';
 
 const { title = 'Tabletoplearning' } = Astro.props;
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
 ---
 
 <!doctype html>
@@ -14,15 +15,15 @@ const { title = 'Tabletoplearning' } = Astro.props;
   </head>
   <body>
     <header class="topbar">
-      <a class="brand" href="/">
+      <a class="brand" href={base}>
         <span class="brand-text">Tabletoplearning</span>
       </a>
       <nav class="nav-links">
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/courses">Courses</a>
-        <a href="/events">Events</a>
-        <a class="login-link" href="/login">Login</a>
+        <a href={base}>Home</a>
+        <a href={`${base}about`}>About</a>
+        <a href={`${base}courses`}>Courses</a>
+        <a href={`${base}events`}>Events</a>
+        <a class="login-link" href={`${base}login`}>Login</a>
       </nav>
     </header>
 

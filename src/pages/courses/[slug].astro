@@ -1,6 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
+
 const courseData = {
   mathematics: {
     title: 'Mathematics',
@@ -96,15 +98,15 @@ const course = slug ? courseData[slug] : undefined;
           {course.features.map((feature) => <li>{feature}</li>)}
         </ul>
         <div class="actions">
-          <a class="button primary" href="/courses">Back to all courses</a>
-          <a class="button secondary" href="#subjects">Choose another subject</a>
+          <a class="button primary" href={`${base}courses`}>Back to all courses</a>
+          <a class="button secondary" href={`${base}#subjects`}>Choose another subject</a>
         </div>
       </div>
     ) : (
       <div class="card" style="max-width: 760px; margin: 0 auto;">
         <h2>Course not found</h2>
         <p>The requested course could not be found.</p>
-        <a class="button primary" href="/courses">Browse courses</a>
+        <a class="button primary" href={`${base}courses`}>Browse courses</a>
       </div>
     )}
   </section>

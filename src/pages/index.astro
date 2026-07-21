@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
 ---
 
 <Layout title="Home">
@@ -30,35 +32,35 @@ import Layout from '../layouts/Layout.astro';
   <section id="subjects" class="section">
     <h2>Choose your subject</h2>
     <div class="card-grid subject-grid">
-      <a class="card" href="/courses/mathematics">
+      <a class="card" href={`${base}courses/mathematics`}>
         <h3>📐 Mathematics</h3>
         <p>Algebra, geometry, calculus, and exam preparation.</p>
       </a>
-      <a class="card" href="/courses/english">
+      <a class="card" href={`${base}courses/english`}>
         <h3>📚 English</h3>
         <p>Grammar, literature, writing skills, and reading confidence.</p>
       </a>
-      <a class="card" href="/courses/languages">
+      <a class="card" href={`${base}courses/languages`}>
         <h3>🗣️ Languages</h3>
         <p>Arabic, French, Spanish, and conversation-focused learning.</p>
       </a>
-      <a class="card" href="/courses/biology">
+      <a class="card" href={`${base}courses/biology`}>
         <h3>🧬 Biology</h3>
         <p>Cells, genetics, ecology, and scientific understanding.</p>
       </a>
-      <a class="card" href="/courses/ai-machine-learning">
+      <a class="card" href={`${base}courses/ai-machine-learning`}>
         <h3>🤖 AI & Machine Learning</h3>
         <p>Foundations of AI, neural networks, and practical applications.</p>
       </a>
-      <a class="card" href="/courses/computer-science">
+      <a class="card" href={`${base}courses/computer-science`}>
         <h3>💻 Computer Science</h3>
         <p>Programming, algorithms, data structures, and problem solving.</p>
       </a>
-      <a class="card" href="/courses/physics">
+      <a class="card" href={`${base}courses/physics`}>
         <h3>⚛️ Physics</h3>
         <p>Mechanics, energy, waves, and scientific reasoning.</p>
       </a>
-      <a class="card" href="/courses/chemistry">
+      <a class="card" href={`${base}courses/chemistry`}>
         <h3>🧪 Chemistry</h3>
         <p>Core concepts, lab skills, and exam-ready practice.</p>
       </a>
@@ -68,19 +70,19 @@ import Layout from '../layouts/Layout.astro';
   <section id="courses" class="section">
     <h2>All courses</h2>
     <div class="card-grid">
-      <a class="card" href="/courses/foundations-course">
+      <a class="card" href={`${base}courses/foundations-course`}>
         <h3>Foundations Course</h3>
         <p>Build a strong base with beginner-friendly lessons and guided practice.</p>
       </a>
-      <a class="card" href="/courses/exam-prep-mastery">
+      <a class="card" href={`${base}courses/exam-prep-mastery`}>
         <h3>Exam Prep Mastery</h3>
         <p>Prepare for assessments with focused revision and step-by-step coaching.</p>
       </a>
-      <a class="card" href="/courses/interactive-practice-lab">
+      <a class="card" href={`${base}courses/interactive-practice-lab`}>
         <h3>Interactive Practice Lab</h3>
         <p>Strengthen skills through exercises, instant feedback, and quizzes.</p>
       </a>
-      <a class="card" href="/courses/advanced-learning-track">
+      <a class="card" href={`${base}courses/advanced-learning-track`}>
         <h3>Advanced Learning Track</h3>
         <p>Go deeper into complex topics with structured support and mentor feedback.</p>
       </a>
@@ -118,7 +120,7 @@ import Layout from '../layouts/Layout.astro';
           <li>Worksheets and practice tasks</li>
           <li>Tutor-monitored progress</li>
         </ul>
-        <a class="button secondary" href="/courses">Explore Bronze</a>
+        <a class="button secondary" href={`${base}courses`}>Explore Bronze</a>
       </div>
 
       <div class="pricing-card featured">
@@ -131,7 +133,7 @@ import Layout from '../layouts/Layout.astro';
           <li>Personalised practice after lessons</li>
           <li>Progress guidance from your tutor</li>
         </ul>
-        <a class="button primary" href="/courses">Explore Silver</a>
+        <a class="button primary" href={`${base}courses`}>Explore Silver</a>
       </div>
 
       <div class="pricing-card">
@@ -144,7 +146,7 @@ import Layout from '../layouts/Layout.astro';
           <li>More regular tutor guidance</li>
           <li>Ideal for exam preparation</li>
         </ul>
-        <a class="button secondary" href="/courses">Explore Gold</a>
+        <a class="button secondary" href={`${base}courses`}>Explore Gold</a>
       </div>
     </div>
   </section>
@@ -154,7 +156,7 @@ import Layout from '../layouts/Layout.astro';
     <p>Join thousands of learners already building confidence with expert support and smart guidance.</p>
     <div class="actions">
       <a class="button primary" href="#subjects">Get started</a>
-      <a class="button secondary" href="/about">Learn more</a>
+      <a class="button secondary" href={`${base}about`}>Learn more</a>
     </div>
   </section>
 </Layout>
