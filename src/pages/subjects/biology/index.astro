@@ -1,0 +1,41 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
+const title = 'Biology';
+const description = 'Support for core topics, practical understanding and revision planning.';
+const courses = [
+  {
+    title: 'GCSE Biology',
+    description: 'Clear topic explanations, quizzes and revision support for exam preparation.',
+    href: `${base}courses/biology`,
+  },
+];
+---
+
+<Layout title={title}>
+  <section class="section">
+    <div class="section-heading">
+      <h2>{title}</h2>
+      <p>{description}</p>
+    </div>
+
+    <div class="subject-page-intro">
+      <p>Build understanding one topic at a time with structured lessons and regular review points.</p>
+      <ul class="feature-list">
+        <li>Clear explanations for core biology topics</li>
+        <li>Revision tasks that reinforce learning week by week</li>
+        <li>Support that helps improve confidence before exams</li>
+      </ul>
+    </div>
+
+    <div class="card-grid" style="margin-top: 1rem;">
+      {courses.map((course) => (
+        <a class="card" href={course.href}>
+          <h3>{course.title}</h3>
+          <p>{course.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>

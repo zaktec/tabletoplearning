@@ -1,0 +1,46 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
+const title = 'English';
+const description = 'Support for reading, writing and exam preparation with clear weekly structure.';
+const courses = [
+  {
+    title: 'GCSE English Language',
+    description: 'Focus on reading, writing and timed response practice with clear tutor feedback.',
+    href: `${base}courses/english`,
+  },
+  {
+    title: 'GCSE English Literature',
+    description: 'Support for essays, analysis and revision across key texts and themes.',
+    href: `${base}courses/english`,
+  },
+];
+---
+
+<Layout title={title}>
+  <section class="section">
+    <div class="section-heading">
+      <h2>{title}</h2>
+      <p>{description}</p>
+    </div>
+
+    <div class="subject-page-intro">
+      <p>Work through one English course at a time with structured lessons, weekly revision and tutor guidance.</p>
+      <ul class="feature-list">
+        <li>Step-by-step writing and analysis support</li>
+        <li>Practice tasks designed to build confidence gradually</li>
+        <li>Feedback that helps the learner improve week by week</li>
+      </ul>
+    </div>
+
+    <div class="card-grid" style="margin-top: 1rem;">
+      {courses.map((course) => (
+        <a class="card" href={course.href}>
+          <h3>{course.title}</h3>
+          <p>{course.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>

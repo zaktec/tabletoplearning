@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 
-const { title = 'Tabletoplearning' } = Astro.props;
+const { title = 'TableTopLearning' } = Astro.props;
 const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
 ---
 
@@ -10,21 +10,31 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Tabletoplearning brings hands-on digital learning experiences to students and communities." />
-    <title>{title} | Tabletoplearning</title>
+    <meta name="description" content="TableTopLearning offers structured online courses, interactive practice and real tutor support for learners at school, college and adult level." />
+    <title>{title} | TableTopLearning</title>
   </head>
   <body>
     <header class="topbar">
       <a class="brand" href={base}>
-        <span class="brand-text">Tabletoplearning</span>
+        <span class="brand-mark" aria-hidden="true">TTL</span>
+        <span class="brand-text">TableTopLearning</span>
       </a>
-      <nav class="nav-links">
-        <a href={base}>Home</a>
-        <a href={`${base}about`}>About</a>
-        <a href={`${base}courses`}>Courses</a>
-        <a href={`${base}events`}>Events</a>
-        <a class="login-link" href={`${base}login`}>Login</a>
-      </nav>
+
+      <div class="nav-shell">
+        <nav class="nav-links" id="site-nav" aria-label="Primary navigation">
+          <a href={`${base}courses`}>Courses</a>
+          <a href={`${base}#subjects`}>Subjects</a>
+          <a href={`${base}#how-it-works`}>How it works</a>
+          <a href={`${base}#pricing`}>Pricing</a>
+          <a href={`${base}about`}>About</a>
+          <a href={`${base}contact`}>Contact</a>
+          <a class="login-link" href={`${base}login`}>Learner login</a>
+        </nav>
+
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </header>
 
     <main>
@@ -32,7 +42,54 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
     </main>
 
     <footer class="footer">
-      <p>© 2026 Tabletoplearning. Learning that feels alive.</p>
+      <p>© 2026 TableTopLearning</p>
+      <p class="footer-credit">Technology by ZakTec Solutions</p>
+      <div class="footer-links">
+        <a href={`${base}about`}>About</a>
+        <a href={`${base}contact`}>Contact</a>
+        <a href={`${base}privacy`}>Privacy</a>
+        <a href={`${base}safeguarding`}>Safeguarding</a>
+        <a href={`${base}login`}>Learner login</a>
+      </div>
     </footer>
+
+    <script>
+      const toggle = document.querySelector('.menu-toggle');
+      const nav = document.querySelector('#site-nav');
+      const body = document.body;
+
+      const setMenuState = (isOpen: boolean) => {
+        toggle?.setAttribute('aria-expanded', String(isOpen));
+        toggle?.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+        nav?.classList.toggle('is-open', isOpen);
+        body.classList.toggle('menu-open', isOpen);
+      };
+
+      if (toggle instanceof HTMLButtonElement && nav instanceof HTMLElement) {
+        toggle.addEventListener('click', () => {
+          const expanded = toggle.getAttribute('aria-expanded') === 'true';
+          setMenuState(!expanded);
+        });
+
+        nav.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => {
+            setMenuState(false);
+          });
+        });
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+            setMenuState(false);
+            toggle.focus();
+          }
+        });
+
+        window.addEventListener('resize', () => {
+          if (window.innerWidth > 900) {
+            setMenuState(false);
+          }
+        });
+      }
+    </script>
   </body>
 </html>

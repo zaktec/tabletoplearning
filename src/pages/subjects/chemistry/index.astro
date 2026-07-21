@@ -1,0 +1,41 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
+const title = 'Chemistry';
+const description = 'Structured support for key concepts, practical understanding and revision planning.';
+const courses = [
+  {
+    title: 'GCSE Chemistry',
+    description: 'Support for the essential ideas and exam-style practice learners need most.',
+    href: `${base}courses/chemistry`,
+  },
+];
+---
+
+<Layout title={title}>
+  <section class="section">
+    <div class="section-heading">
+      <h2>{title}</h2>
+      <p>{description}</p>
+    </div>
+
+    <div class="subject-page-intro">
+      <p>Follow a weekly structure that builds knowledge gradually and keeps revision focused and manageable.</p>
+      <ul class="feature-list">
+        <li>Clear explanations for key chemistry ideas</li>
+        <li>Practice that supports exam confidence</li>
+        <li>Progress guidance that helps the learner stay on track</li>
+      </ul>
+    </div>
+
+    <div class="card-grid" style="margin-top: 1rem;">
+      {courses.map((course) => (
+        <a class="card" href={course.href}>
+          <h3>{course.title}</h3>
+          <p>{course.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>

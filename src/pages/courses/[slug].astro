@@ -3,7 +3,13 @@ import Layout from '../../layouts/Layout.astro';
 
 const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
 
-const courseData = {
+interface Course {
+  title: string;
+  blurb: string;
+  features: string[];
+}
+
+const courseData: Record<string, Course> = {
   mathematics: {
     title: 'Mathematics',
     blurb: 'Algebra, geometry, calculus, and exam-ready problem solving.',
@@ -15,9 +21,9 @@ const courseData = {
     features: ['Essay planning', 'Grammar correction', 'Reading comprehension practice']
   },
   languages: {
-    title: 'Languages',
-    blurb: 'Build speaking and writing confidence in Arabic, French, and Spanish.',
-    features: ['Conversation practice', 'Vocabulary building', 'Writing support']
+    title: 'Religion & Languages',
+    blurb: 'Explore key religious ideas and build confidence in speaking and writing.',
+    features: ['Religion studies', 'Vocabulary building', 'Speaking and writing support']
   },
   biology: {
     title: 'Biology',
@@ -97,6 +103,15 @@ const course = slug ? courseData[slug] : undefined;
         <ul>
           {course.features.map((feature) => <li>{feature}</li>)}
         </ul>
+        <div class="course-benefits">
+          <h3>Benefits of choosing this course</h3>
+          <ul>
+            <li>Clear step-by-step lessons that keep learning easy to follow.</li>
+            <li>Practical practice tasks that build confidence each week.</li>
+            <li>Expert tutor support to help you stay on track.</li>
+            <li>Designed for steady progress without overwhelm.</li>
+          </ul>
+        </div>
         <div class="actions">
           <a class="button primary" href={`${base}courses`}>Back to all courses</a>
           <a class="button secondary" href={`${base}#subjects`}>Choose another subject</a>

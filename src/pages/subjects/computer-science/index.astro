@@ -1,0 +1,46 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
+const title = 'Computer Science';
+const description = 'Structured support for programming, problem solving and theory revision.';
+const courses = [
+  {
+    title: 'GCSE Computer Science',
+    description: 'Clear support for algorithms, programming and computer systems.',
+    href: `${base}courses/computer-science`,
+  },
+  {
+    title: 'Programming Pathway',
+    description: 'A step-by-step route for learners building practical coding confidence.',
+    href: `${base}courses/computer-science`,
+  },
+];
+---
+
+<Layout title={title}>
+  <section class="section">
+    <div class="section-heading">
+      <h2>{title}</h2>
+      <p>{description}</p>
+    </div>
+
+    <div class="subject-page-intro">
+      <p>Explore practical lessons and revision tasks that build skills gradually without overwhelming the learner.</p>
+      <ul class="feature-list">
+        <li>Concepts introduced in a clear sequence</li>
+        <li>Programming practice with guided support</li>
+        <li>Revision plans that fit around independent study</li>
+      </ul>
+    </div>
+
+    <div class="card-grid" style="margin-top: 1rem;">
+      {courses.map((course) => (
+        <a class="card" href={course.href}>
+          <h3>{course.title}</h3>
+          <p>{course.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>
