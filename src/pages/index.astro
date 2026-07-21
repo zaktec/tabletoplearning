@@ -4,210 +4,327 @@ import Layout from '../layouts/Layout.astro';
 const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
 ---
 
-<Layout title="Home">
+<Layout title="Online Courses for Future-Ready Subjects">
   <section class="hero">
     <div class="hero-content">
-      <p class="eyebrow">GCSE, A-LEVEL &amp; ADULT LEARNING</p>
-      <h1>Structured courses with support when you need it.</h1>
-      <p>
-        Work through weekly lessons, guided practice and helpful tutor feedback at your own pace.
-      </p>
+      <p class="eyebrow">Online courses for the subjects that shape your future</p>
+      <h1>Structured learning with real tutor support</h1>
+      <p>Build skills step by step across core academic and technology subjects, with clear weekly lessons and the level of support that suits you.</p>
       <div class="actions">
-        <a class="button primary" href="#subjects">Choose a subject</a>
-        <a class="button secondary" href="#pricing">Compare plans</a>
+        <a class="button primary" href={`${base}courses`}>Explore courses</a>
+        <a class="button secondary" href="#learning-pathways">View learning pathways</a>
       </div>
+      <ul class="hero-points" aria-label="Course benefits">
+        <li>Short, focused courses</li>
+        <li>Clear learning pathways</li>
+        <li>Flexible monthly plans</li>
+        <li>Tutor-monitored progress</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="subjects" class="section">
+    <div class="subject-directory">
+      <div class="section-heading">
+        <p class="eyebrow">Online courses</p>
+        <h2>Explore all subject areas</h2>
+        <p>Browse course information for each main subject.</p>
+      </div>
+      <div class="subject-grid">
+        <a class="subject-card" href={`${base}subjects/mathematics`} aria-label="Explore Mathematics courses">
+          <h3>Mathematics</h3>
+          <p>KS3, GCSE, Functional Skills and A-level.</p>
+        </a>
+        <a class="subject-card" href={`${base}subjects/computer-science`} aria-label="Explore Computer Science courses">
+          <h3>Computer Science</h3>
+          <p>Programming, theory and GCSE preparation.</p>
+        </a>
+        <a class="subject-card" href={`${base}subjects/ai-machine-learning`} aria-label="Explore AI and Machine Learning courses">
+          <h3>AI &amp; Machine Learning</h3>
+          <p>Foundations, concepts and practical projects.</p>
+        </a>
+        <a class="subject-card" href={`${base}subjects/english`} aria-label="Explore English course information; courses coming soon">
+          <span class="subject-status">Courses coming soon</span>
+          <h3>English</h3>
+          <p>Reading, writing and examination preparation.</p>
+        </a>
+        <a class="subject-card" href={`${base}subjects/biology`} aria-label="Explore Biology course information; courses coming soon">
+          <span class="subject-status">Courses coming soon</span>
+          <h3>Biology</h3>
+          <p>Core topics, practical knowledge and revision.</p>
+        </a>
+        <a class="subject-card" href={`${base}subjects/physics`} aria-label="Explore Physics course information; courses coming soon">
+          <span class="subject-status">Courses coming soon</span>
+          <h3>Physics</h3>
+          <p>Principles, equations and examination practice.</p>
+        </a>
+        <a class="subject-card" href={`${base}subjects/chemistry`} aria-label="Explore Chemistry course information; courses coming soon">
+          <span class="subject-status">Courses coming soon</span>
+          <h3>Chemistry</h3>
+          <p>Key concepts, calculations and revision.</p>
+        </a>
+        <a class="subject-card" href={`${base}subjects/languages`} aria-label="Explore Religion and Languages course information; courses coming soon">
+          <span class="subject-status">Courses coming soon</span>
+          <h3>Religion &amp; Languages</h3>
+          <p>Religion, speaking, writing and grammar.</p>
+        </a>
+      </div>
+    </div>
+
+    <div id="learning-pathways" class="pathway-directory">
+      <div class="section-heading">
+        <p class="eyebrow">Learning pathways</p>
+        <h2>Choose your learning pathway</h2>
+        <p>Choose a course for your current level, then progress when you are ready.</p>
+      </div>
+      <div class="pathway-grid">
+        <article class="pathway-card">
+          <p class="pathway-label">Maths</p>
+          <h3>Build confidence from core skills to A-level</h3>
+          <p>Build core skills and prepare for Maths examinations.</p>
+          <ul class="course-list">
+            <li>KS3 Maths</li>
+            <li>GCSE Foundation Maths</li>
+            <li>GCSE Higher Maths</li>
+            <li>Functional Skills Maths</li>
+            <li>A-Level Maths</li>
+            <li>Maths Challenge</li>
+          </ul>
+          <a class="button secondary" href={`${base}subjects/mathematics`}>Explore Maths</a>
+        </article>
+
+        <article class="pathway-card featured-pathway">
+          <p class="pathway-label">Computer Science</p>
+          <h3>Develop practical coding and technology skills</h3>
+          <p>Build programming, problem-solving and technology skills.</p>
+          <ul class="course-list">
+            <li>Python Coding</li>
+            <li>Computer Science Foundations</li>
+            <li>GCSE Computer Science</li>
+            <li>AI Foundations</li>
+          </ul>
+          <a class="button primary" href={`${base}subjects/computer-science`}>Explore Computer Science</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="coding-pathway" class="section content-panel">
+    <div class="section-heading">
+      <p class="eyebrow">Coding pathway</p>
+      <h2>Learn Python step by step</h2>
+      <p>Begin at the right level and progress through three focused courses.</p>
+    </div>
+    <ol class="coding-steps">
+      <li>
+        <span class="step-number" aria-hidden="true">1</span>
+        <div>
+          <h3>Python Foundations</h3>
+          <p>Learn variables, input, calculations, selection and loops.</p>
+        </div>
+      </li>
+      <li>
+        <span class="step-number" aria-hidden="true">2</span>
+        <div>
+          <h3>Python Problem Solving</h3>
+          <p>Use functions, lists, validation, algorithms and debugging.</p>
+        </div>
+      </li>
+      <li>
+        <span class="step-number" aria-hidden="true">3</span>
+        <div>
+          <h3>Python Projects</h3>
+          <p>Plan, build and test practical programs with increasing independence.</p>
+        </div>
+      </li>
+    </ol>
+    <div class="actions">
+      <a class="button primary" href={`${base}subjects/computer-science`}>Explore the coding pathway</a>
     </div>
   </section>
 
   <section id="how-it-works" class="section">
     <div class="section-heading">
-      <h2>How online support works</h2>
-      <p>Choose a course, work through weekly lessons and get the level of tutor support that suits you.</p>
+      <p class="eyebrow">How it works</p>
+      <h2>A clear way to learn online</h2>
+      <p>Choose a course, follow it in order and continue when ready.</p>
     </div>
-    <div class="step-list">
+    <div class="step-list four-steps">
       <article class="step-card">
         <span class="step-number">1</span>
         <h3>Choose a course</h3>
-        <p>Select a subject and level that matches your learning goal.</p>
+        <p>Select a subject and level for your goals.</p>
       </article>
       <article class="step-card">
         <span class="step-number">2</span>
         <h3>Learn week by week</h3>
-        <p>Complete lessons, quizzes and practice tasks at your own pace.</p>
+        <p>Complete lessons, examples, quizzes and practical activities in order.</p>
       </article>
       <article class="step-card">
         <span class="step-number">3</span>
-        <h3>Get tutor support</h3>
-        <p>Receive feedback and join live support included in your plan.</p>
+        <h3>Receive tutor support</h3>
+        <p>Get monitoring, feedback and live support through your plan.</p>
+      </article>
+      <article class="step-card">
+        <span class="step-number">4</span>
+        <h3>Continue your pathway</h3>
+        <p>Move to the next course when ready.</p>
       </article>
     </div>
   </section>
 
-  <section id="subjects" class="section">
+  <section id="course-features" class="section content-panel tutor-panel">
     <div class="section-heading">
-      <h2>Choose your subject</h2>
-      <p>Start with the subject that fits your next step.</p>
+      <p class="eyebrow">What courses include</p>
+      <h2>Clear lessons with guidance when you need it</h2>
+      <p>Learn independently, check progress and receive guidance through your plan.</p>
     </div>
-    <div class="subject-grid">
-      <a class="subject-card" href={`${base}subjects/mathematics`} aria-label="View Mathematics courses">
-        <span class="subject-icon" aria-hidden="true">📐</span>
-        <h3>Mathematics</h3>
-        <p>GCSE, Functional Skills and A-level support.</p>
-      </a>
-      <a class="subject-card" href={`${base}subjects/computer-science`} aria-label="View Computer Science courses">
-        <span class="subject-icon" aria-hidden="true">💻</span>
-        <h3>Computer Science</h3>
-        <p>Programming, theory and revision support.</p>
-      </a>
-      <a class="subject-card" href={`${base}subjects/ai-machine-learning`} aria-label="View AI and Machine Learning courses">
-        <span class="subject-icon" aria-hidden="true">🤖</span>
-        <h3>AI &amp; Machine Learning</h3>
-        <p>Beginner-friendly AI concepts and practical projects.</p>
-      </a>
-      <a class="subject-card" href={`${base}subjects/english`} aria-label="View English course information (coming soon)">
-        <span class="subject-icon" aria-hidden="true">📚</span>
-        <span class="subject-status">Coming soon</span>
-        <h3>English</h3>
-        <p>Reading, writing and exam preparation.</p>
-      </a>
-      <a class="subject-card" href={`${base}subjects/biology`} aria-label="View Biology course information (coming soon)">
-        <span class="subject-icon" aria-hidden="true">🧬</span>
-        <span class="subject-status">Coming soon</span>
-        <h3>Biology</h3>
-        <p>Core topics, practical knowledge and revision.</p>
-      </a>
-      <a class="subject-card" href={`${base}subjects/physics`} aria-label="View Physics course information (coming soon)">
-        <span class="subject-icon" aria-hidden="true">⚛️</span>
-        <span class="subject-status">Coming soon</span>
-        <h3>Physics</h3>
-        <p>Core principles, equations and exam practice.</p>
-      </a>
-      <a class="subject-card" href={`${base}subjects/chemistry`} aria-label="View Chemistry course information (coming soon)">
-        <span class="subject-icon" aria-hidden="true">🧪</span>
-        <span class="subject-status">Coming soon</span>
-        <h3>Chemistry</h3>
-        <p>Key concepts, calculations and revision.</p>
-      </a>
-      <a class="subject-card" href={`${base}subjects/languages`} aria-label="View Religion and Languages course information (coming soon)">
-        <span class="subject-icon" aria-hidden="true">🗣️</span>
-        <span class="subject-status">Coming soon</span>
-        <h3>Religion &amp; Languages</h3>
-        <p>Religion, speaking, writing and grammar support.</p>
-      </a>
+    <div class="feature-support-grid">
+      <div>
+        <h3>Course features</h3>
+        <ul class="check-list">
+          <li>Clear explanations and worked examples</li>
+          <li>Practice questions and quizzes</li>
+          <li>Coding activities and projects</li>
+          <li>Progress checks and next steps</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Tutor guidance</h3>
+        <ul class="check-list">
+          <li>Monitored course progress</li>
+          <li>Feedback and personalised practice</li>
+          <li>Monthly reviews and live lessons</li>
+          <li>Help choosing the next course</li>
+        </ul>
+      </div>
     </div>
-  </section>
-
-  <section class="section testimonials-section">
-    <div class="section-heading">
-      <h2>What learners say</h2>
-      <p>Small steps, steady progress and better confidence.</p>
-    </div>
-    <div class="testimonial-grid">
-      <article class="testimonial-card">
-        <p>“The lessons were clear and the tutor feedback helped me stay focused.”</p>
-        <strong>Maya, GCSE English learner</strong>
-      </article>
-      <article class="testimonial-card">
-        <p>“The progress updates made revision feel manageable and less stressful.”</p>
-        <strong>James, parent of a Year 10 learner</strong>
-      </article>
-    </div>
+    <p class="section-note">Features and tutor contact vary by course and support plan.</p>
   </section>
 
   <section id="pricing" class="section pricing-section">
     <div class="section-heading">
-      <h2>Compare Bronze, Silver and Gold</h2>
-      <p>Monthly plans with no long-term contract. Choose the level of tutor support that suits you.</p>
+      <p class="eyebrow">Pricing</p>
+      <h2>Choose your level of support</h2>
+      <p>Compare monthly plans for one course and choose the level of guidance that suits you.</p>
     </div>
     <div class="pricing-grid">
       <article class="pricing-card">
-        <p class="pricing-label">BRONZE — SELF-PACED</p>
-        <h3>Self-paced learning</h3>
-        <p class="price">£19<span>/month</span></p>
-        <p class="pricing-copy">For independent learners who want structure and light support.</p>
+        <p class="pricing-label">Bronze &mdash; Course Access</p>
+        <h3>Independent learning</h3>
+        <p class="price">&pound;19<span>/month</span></p>
+        <p class="pricing-copy">Structured lessons with light tutor monitoring.</p>
         <ul>
           <li>One selected course</li>
-          <li>Weekly lessons and practice</li>
-          <li>Progress tracking</li>
+          <li>Weekly lessons and activities</li>
+          <li>Quizzes and progress tracking</li>
           <li>Tutor-monitored progress</li>
         </ul>
-        <a class="button secondary" href={`${base}courses`}>Choose Bronze</a>
+        <a class="button secondary" href={`${base}courses`}>Explore Bronze</a>
       </article>
 
       <article class="pricing-card featured">
         <span class="badge">Most popular</span>
-        <p class="pricing-label">SILVER — GUIDED</p>
-        <h3>Guided learning</h3>
-        <p class="price">£49<span>/month</span></p>
-        <p class="pricing-copy">For learners who want regular guidance and personalised help.</p>
+        <p class="pricing-label">Silver &mdash; Guided Support</p>
+        <h3>Regular guidance</h3>
+        <p class="price">&pound;49<span>/month</span></p>
+        <p class="pricing-copy">Regular guidance and personalised help.</p>
         <ul>
           <li>Everything in Bronze</li>
           <li>One live lesson each month</li>
           <li>Personalised practice</li>
           <li>Monthly tutor review</li>
         </ul>
-        <a class="button primary" href={`${base}courses`}>Choose Silver</a>
+        <a class="button primary" href={`${base}courses`}>Explore Silver</a>
       </article>
 
       <article class="pricing-card">
-        <p class="pricing-label">GOLD — TUTOR-SUPPORTED</p>
-        <h3>Tutor-supported learning</h3>
-        <p class="price">£89<span>/month</span></p>
-        <p class="pricing-copy">For learners who need more regular support or exam preparation.</p>
+        <p class="pricing-label">Gold &mdash; Tutor-Supported</p>
+        <h3>Focused support</h3>
+        <p class="price">&pound;89<span>/month</span></p>
+        <p class="pricing-copy">Frequent support for focused exam preparation.</p>
         <ul>
           <li>Everything in Silver</li>
           <li>Two live lessons each month</li>
           <li>Priority tutor support</li>
           <li>Personalised learning plan</li>
         </ul>
-        <a class="button secondary" href={`${base}courses`}>Choose Gold</a>
+        <a class="button secondary" href={`${base}courses`}>Explore Gold</a>
       </article>
     </div>
-    <p class="pricing-note">Cancel anytime. No long-term contract.</p>
+    <p class="pricing-note">Plan availability and current terms are confirmed before you start.</p>
   </section>
 
-  <section class="section faq-section">
+  <section id="why-tabletoplearning" class="section">
     <div class="section-heading">
-      <h2>Frequently asked questions</h2>
-      <p>Helpful answers before you choose a course.</p>
+      <p class="eyebrow">Why TableTopLearning?</p>
+      <h2>Clear, practical and manageable</h2>
+    </div>
+    <div class="benefit-grid">
+      <article>
+        <h3>Structured courses</h3>
+        <p>Lessons are organised in a clear sequence so learners know what to study next.</p>
+      </article>
+      <article>
+        <h3>Focused pathways</h3>
+        <p>Short courses connect naturally so learners can progress one stage at a time.</p>
+      </article>
+      <article>
+        <h3>Tutor guidance</h3>
+        <p>Progress is monitored by a tutor, with additional feedback and live guidance available.</p>
+      </article>
+      <article>
+        <h3>Flexible learning</h3>
+        <p>Complete activities at a manageable pace while following a clear weekly structure.</p>
+      </article>
+    </div>
+    <div id="for-parents" class="audience-callout">
+      <h3>Designed for learners and parents</h3>
+      <p>For Maths examination preparation, Python beginners, GCSE Computer Science learners and families seeking tutor-monitored online learning.</p>
+    </div>
+  </section>
+
+  <section id="faqs" class="section faq-section">
+    <div class="section-heading">
+      <p class="eyebrow">Frequently asked questions</p>
+      <h2>Helpful answers before you start</h2>
     </div>
     <div class="faq-list">
       <div class="faq-item">
         <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-1" data-faq-toggle>
-          Do I need an account to browse?
+          Can I browse courses before choosing a plan?
           <span aria-hidden="true">+</span>
         </button>
         <div id="faq-1" class="faq-answer" hidden>
-          <p>No. You can browse subjects and courses without an account. You only need an account when you are ready to enrol.</p>
+          <p>Yes. You can explore subjects, pathways, course information and support plans before deciding what suits you.</p>
         </div>
       </div>
       <div class="faq-item">
         <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-2" data-faq-toggle>
-          Which plans include tutor support?
+          Which plans include live tutor support?
           <span aria-hidden="true">+</span>
         </button>
         <div id="faq-2" class="faq-answer" hidden>
-          <p>Silver and Gold include live tutor support and personalised feedback. Bronze is mainly self-paced.</p>
+          <p>Silver includes one live lesson each month. Gold includes two live lessons each month. Bronze is mainly independent learning with tutor-monitored progress.</p>
         </div>
       </div>
       <div class="faq-item">
         <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-3" data-faq-toggle>
-          Can I cancel or change my plan?
+          Are all subject courses available now?
           <span aria-hidden="true">+</span>
         </button>
         <div id="faq-3" class="faq-answer" hidden>
-          <p>Yes. Monthly plans can be cancelled or changed from your learner account.</p>
+          <p>Maths, Computer Science and AI course information is available now. The other subject cards are clearly marked as coming soon.</p>
         </div>
       </div>
     </div>
   </section>
 
   <section class="section cta-section">
-    <h2>Start with the subject that fits your goals</h2>
-    <p>Explore subjects and choose the support level that suits you.</p>
+    <h2>Start with the course that fits your goals</h2>
+    <p>Explore available subjects and choose the learning pathway that suits you.</p>
     <div class="actions">
-      <a class="button primary" href="#subjects">Browse subjects</a>
-      <a class="button secondary" href="#pricing">Compare plans</a>
+      <a class="button primary" href={`${base}courses`}>Browse courses</a>
     </div>
   </section>
 </Layout>

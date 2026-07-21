@@ -10,7 +10,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="TableTopLearning offers structured online courses, interactive practice and real tutor support for learners at school, college and adult level." />
+    <meta name="description" content="Structured online courses across core academic and technology subjects, with clear learning pathways and tutor support." />
     <title>{title} | TableTopLearning</title>
   </head>
   <body>
@@ -22,13 +22,12 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
 
       <div class="nav-shell">
         <nav class="nav-links" id="site-nav" aria-label="Primary navigation">
-          <a href={`${base}courses`}>Courses</a>
           <a href={`${base}#subjects`}>Subjects</a>
-          <a href={`${base}#how-it-works`}>How it works</a>
+          <a href={`${base}#learning-pathways`}>Learning Pathways</a>
+          <a href={`${base}#how-it-works`}>How It Works</a>
           <a href={`${base}#pricing`}>Pricing</a>
-          <a href={`${base}about`}>About</a>
-          <a href={`${base}contact`}>Contact</a>
-          <a class="login-link" href={`${base}login`}>Learner login</a>
+          <a class="nav-login" href={`${base}login`}>Learner Login</a>
+          <a class="header-cta" href={`${base}courses`}>Explore Courses</a>
         </nav>
 
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation menu">
@@ -42,14 +41,43 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
     </main>
 
     <footer class="footer">
-      <p>© 2026 TableTopLearning</p>
-      <p class="footer-credit">Technology by ZakTec Solutions</p>
-      <div class="footer-links">
-        <a href={`${base}about`}>About</a>
-        <a href={`${base}contact`}>Contact</a>
-        <a href={`${base}privacy`}>Privacy</a>
-        <a href={`${base}safeguarding`}>Safeguarding</a>
-        <a href={`${base}login`}>Learner login</a>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href={base}>
+            <span class="brand-mark" aria-hidden="true">TTL</span>
+            <span class="brand-text">TableTopLearning</span>
+          </a>
+          <p>Structured online courses for core academic and technology subjects.</p>
+        </div>
+
+        <div class="footer-group">
+          <h2>Courses</h2>
+          <a href={`${base}subjects/mathematics`}>Maths</a>
+          <a href={`${base}subjects/computer-science`}>Python Coding</a>
+          <a href={`${base}subjects/computer-science`}>Computer Science</a>
+          <a href={`${base}subjects/ai-machine-learning`}>AI Foundations</a>
+        </div>
+
+        <div class="footer-group">
+          <h2>Information</h2>
+          <a href={`${base}#learning-pathways`}>Learning Pathways</a>
+          <a href={`${base}#how-it-works`}>How It Works</a>
+          <a href={`${base}about`}>About</a>
+          <a href={`${base}contact`}>Contact</a>
+        </div>
+
+        <div class="footer-group">
+          <h2>Support</h2>
+          <a href={`${base}login`}>Learner Login</a>
+          <a href={`${base}#faqs`}>FAQs</a>
+          <a href={`${base}privacy`}>Privacy Policy</a>
+          <a href={`${base}safeguarding`}>Safeguarding</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 TableTopLearning</p>
+        <p class="footer-credit">Technology by ZakTec Solutions</p>
       </div>
     </footer>
 

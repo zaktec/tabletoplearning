@@ -1,41 +1,74 @@
-# Project Overview
+# TableTopLearning Project Overview
 
-## Project Name
+## Product purpose
 
-Tabletoplearning
+TableTopLearning presents structured online courses for GCSE, A-level, Functional Skills and adult learners. The public website helps learners and parents understand the available subjects, course structure and three levels of tutor support.
 
-## Purpose
+The experience should feel warm, professional, practical and easy to understand. The exact brand and content rules are defined in [branding.md](branding.md).
 
-Tabletoplearning is a modern educational landing site designed to present learning subjects, course options, support levels, and student-focused messaging in a polished, approachable way.
+## Primary audiences
 
-## Current Goals
+- Learners comparing subjects and support plans
+- Parents or carers evaluating learning support
+- Prospective learners looking for course and tutor information
+- Future administrators or developers extending the service
 
-- Showcase subjects and courses clearly on the homepage
-- Present monthly support levels such as Bronze, Silver, and Gold
-- Provide a clean user experience for learners and parents
-- Reflect a warm and premium education brand
+## Current public experience
 
-## Structure
+- A homepage focused on Maths and Computer Science learning pathways
+- A three-stage Python coding pathway
+- Homepage subject cards and landing pages across eight subject areas
+- Static course detail pages
+- Bronze, Silver and Gold support-plan comparisons
+- Course features, tutor-support information and an interactive FAQ
+- About, contact, privacy and safeguarding information
+- A learner-login destination that clearly states authentication is not implemented yet
 
-- Home page: hero section, subject selection, course cards, testimonials, CTA
-- Courses page: overview of course offerings
-- Support levels: featured pricing-style cards
-- Brand docs: typography, color palette, and tone guidance
+## Current functional scope
 
-## Tech Stack
+The project is a static marketing and course-discovery website. Browser-side JavaScript is limited to the responsive navigation menu and FAQ disclosure controls.
 
-- Astro
-- HTML/CSS
-- Node.js
-- npm
+The following systems do **not** exist yet:
 
-## Notes for ChatGPT or Future Enhancements
+- Account registration or authentication
+- Learner dashboards or saved progress
+- Course delivery or lesson content
+- Enrolment and checkout
+- Payment or subscription processing
+- Tutor messaging, scheduling or live lessons
+- Database, API, CMS or admin interface
+- Form submission or email service
+- Analytics or cookie-consent tooling
 
-- The site is currently a static landing page.
-- Content is simple and can be expanded into a full course catalog or enrollment flow.
-- The design direction is based on warm neutral colors and modern educational UI.
-- If you want to evolve the brand further, you can add:
-  - a real login/auth flow
-  - a dynamic CMS or database-backed course catalog
-  - richer course detail pages
-  - testimonials and FAQs from real users
+Contact, privacy and safeguarding actions currently use `mailto:` links. Pricing buttons lead to the static courses page.
+
+## Support plans shown in the UI
+
+| Plan | Displayed price | Positioning |
+| --- | ---: | --- |
+| Bronze | £19/month | Self-paced learning with structure and light support |
+| Silver | £49/month | Guided learning with one live lesson per month |
+| Gold | £89/month | More regular tutor support and exam preparation |
+
+These are presentation-layer values only. No billing integration is present.
+
+## Subject catalogue
+
+| Subject | Site status |
+| --- | --- |
+| Mathematics | Available |
+| Computer Science | Available |
+| AI & Machine Learning | Available |
+| English | Coming soon |
+| Biology | Coming soon |
+| Physics | Coming soon |
+| Chemistry | Coming soon |
+| Religion & Languages | Coming soon |
+
+Every subject currently has a generated subject page. The homepage promotes Maths and Computer Science directly, while the individual subject pages hold the broader course information. Course descriptions are stored directly in Astro source files rather than in a shared content system.
+
+## Product direction
+
+Likely future extensions include real authentication, a central course catalogue, enrolment and billing, learner progress, tutor workflows and managed content. These are possible directions, not existing features or approved implementation commitments.
+
+For implementation details, read [technical-reference.md](technical-reference.md).
