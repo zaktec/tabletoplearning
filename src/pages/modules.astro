@@ -1,0 +1,68 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ModuleCard from '../components/ModuleCard.astro';
+import { learningModules } from '../data/learning';
+
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
+---
+
+<Layout
+  title="Short Online Learning Modules"
+  description="Explore focused online modules in Maths, Python Coding, Problem Solving and Artificial Intelligence from TableTopLearning."
+>
+  <section class="page-intro section">
+    <p class="eyebrow">Short modules</p>
+    <h1>Start with one focused topic</h1>
+    <p>Each module focuses on a specific skill or topic. Complete modules individually or combine them as part of a wider learning pathway.</p>
+    <div class="actions">
+      <a class="button primary" href="#module-list">Browse Modules</a>
+      <a class="button secondary" href={`${base}learning-pathways`}>View Learning Pathways</a>
+    </div>
+  </section>
+
+  <section id="module-list" class="section">
+    <div class="section-heading">
+      <p class="eyebrow">Module examples</p>
+      <h2>Choose a starting topic</h2>
+      <p>These examples show the initial module structure. Individual module pages are still being prepared.</p>
+    </div>
+
+    <div class="module-grid">
+      {learningModules.map((module) => <ModuleCard {...module} />)}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <p class="eyebrow">Module learning</p>
+      <h2>Work through one skill at a time</h2>
+    </div>
+
+    <div class="step-list">
+      <article class="step-card">
+        <span class="step-number" aria-hidden="true">1</span>
+        <h3>Choose a topic</h3>
+        <p>Select a module that matches your current level or goal.</p>
+      </article>
+      <article class="step-card">
+        <span class="step-number" aria-hidden="true">2</span>
+        <h3>Complete the activities</h3>
+        <p>Work through explanations, examples, practice and short checks.</p>
+      </article>
+      <article class="step-card">
+        <span class="step-number" aria-hidden="true">3</span>
+        <h3>Continue when ready</h3>
+        <p>Choose another module or follow a related learning pathway.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section cta-section">
+    <h2>See how modules connect</h2>
+    <p>Explore the initial pathways for Maths, Python Coding, Problem Solving and Artificial Intelligence.</p>
+    <div class="actions">
+      <a class="button primary" href={`${base}learning-pathways`}>View Learning Pathways</a>
+      <a class="button secondary" href={`${base}contact`}>Ask About a Module</a>
+    </div>
+  </section>
+</Layout>

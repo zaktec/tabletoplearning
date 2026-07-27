@@ -1,0 +1,219 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
+---
+
+<Layout
+  title="Tutor Support and Learning Options"
+  description="Compare independent learning and tutor-guided support options from TableTopLearning, with clear information about what is included."
+>
+  <section class="page-intro section">
+    <p class="eyebrow">Tutor support</p>
+    <h1>Guidance when you need it</h1>
+    <p>TableTopLearning combines flexible online learning with tutor guidance. Learners can study independently and receive support when they need clarification, feedback or help choosing their next module.</p>
+    <div class="actions">
+      <a class="button primary" href="#pricing">Compare Support Options</a>
+      <a class="button secondary" href={`${base}contact`}>Ask About Support</a>
+    </div>
+  </section>
+
+  <section class="section tutor-support-section">
+    <div class="section-heading">
+      <p class="eyebrow">What support can include</p>
+      <h2>Practical help with learning</h2>
+      <p>The support available depends on the selected course or plan.</p>
+    </div>
+
+    <div class="support-item-grid">
+      <article>
+        <h3>Clear explanations</h3>
+        <p>Help understanding difficult topics and worked examples.</p>
+      </article>
+      <article>
+        <h3>Progress guidance</h3>
+        <p>Support choosing the right module or next step.</p>
+      </article>
+      <article>
+        <h3>Practical feedback</h3>
+        <p>Feedback on selected tasks, activities or projects where included.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="pricing" class="section pricing-section">
+    <div class="section-heading">
+      <p class="eyebrow">Support options</p>
+      <h2>Choose the level of support you need</h2>
+      <p>Start with independent learning or choose additional tutor guidance.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <article class="pricing-card">
+        <p class="pricing-label">Independent Learning</p>
+        <h3>Learn with structure</h3>
+        <p class="price">&pound;19<span>/month</span></p>
+        <ul>
+          <li>One selected course</li>
+          <li>Weekly lessons and activities</li>
+          <li>Quizzes and progress tracking</li>
+          <li>Light tutor monitoring included</li>
+          <li>Live lessons not included</li>
+        </ul>
+        <a class="button secondary" href={`${base}courses`}>Explore Courses</a>
+      </article>
+
+      <article class="pricing-card featured">
+        <span class="badge">Recommended</span>
+        <p class="pricing-label">Tutor Guidance</p>
+        <h3>Regular guidance</h3>
+        <p class="price">&pound;49<span>/month</span></p>
+        <ul>
+          <li>One selected course and learning activities</li>
+          <li>One live lesson each month</li>
+          <li>Personalised practice</li>
+          <li>Monthly tutor review</li>
+          <li>Priority tutor support not included</li>
+        </ul>
+        <a class="button primary" href={`${base}contact`}>Explore Tutor Guidance</a>
+      </article>
+
+      <article class="pricing-card">
+        <p class="pricing-label">Focused Support</p>
+        <h3>Focused preparation</h3>
+        <p class="price">&pound;89<span>/month</span></p>
+        <ul>
+          <li>One selected course and learning activities</li>
+          <li>Two live lessons each month</li>
+          <li>Priority tutor support</li>
+          <li>Personalised learning plan</li>
+          <li>Official examination entry not included</li>
+        </ul>
+        <a class="button secondary" href={`${base}contact`}>Enquire About Support</a>
+      </article>
+    </div>
+    <p class="pricing-note">Plan availability and current terms are confirmed before you start.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <p class="eyebrow">Why TableTopLearning</p>
+      <h2>Clear, practical and manageable</h2>
+    </div>
+
+    <div class="benefit-grid">
+      <article>
+        <h3>Structured courses</h3>
+        <p>Modules are organised into clear pathways so learners understand what to study next.</p>
+      </article>
+      <article>
+        <h3>Focused pathways</h3>
+        <p>Learners can build towards Maths, Coding, Problem Solving and AI goals.</p>
+      </article>
+      <article>
+        <h3>Tutor guidance</h3>
+        <p>Support is available where included, without replacing independent learning.</p>
+      </article>
+      <article>
+        <h3>Flexible learning</h3>
+        <p>Learners can study online and progress at a manageable pace.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="faqs" class="section faq-section">
+    <div class="section-heading">
+      <p class="eyebrow">Frequently asked questions</p>
+      <h2>Helpful answers before you start</h2>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-1" data-faq-toggle>
+          Can I complete modules separately?
+          <span aria-hidden="true">+</span>
+        </button>
+        <div id="faq-1" class="faq-answer" hidden>
+          <p>Yes. Modules can be completed individually, although related modules can also form part of a wider learning pathway.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-2" data-faq-toggle>
+          What is a learning pathway?
+          <span aria-hidden="true">+</span>
+        </button>
+        <div id="faq-2" class="faq-answer" hidden>
+          <p>A learning pathway is a structured group of modules that helps learners progress towards a larger subject or qualification-preparation goal.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-3" data-faq-toggle>
+          Does TableTopLearning award GCSE qualifications?
+          <span aria-hidden="true">+</span>
+        </button>
+        <div id="faq-3" class="faq-answer" hidden>
+          <p>No. TableTopLearning provides learning and preparation courses. Official qualifications must be taken through an approved examination or assessment centre.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-4" data-faq-toggle>
+          Which pathways are available?
+          <span aria-hidden="true">+</span>
+        </button>
+        <div id="faq-4" class="faq-answer" hidden>
+          <p>The initial pathways focus on GCSE Foundation Maths, GCSE Higher Maths, Python Coding, Problem Solving and Artificial Intelligence. More pathways will be added later.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-5" data-faq-toggle>
+          Is tutor support included?
+          <span aria-hidden="true">+</span>
+        </button>
+        <div id="faq-5" class="faq-answer" hidden>
+          <p>Tutor support depends on the course or support option selected. Each course page should clearly explain what is included.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-6" data-faq-toggle>
+          Can learners study at their own pace?
+          <span aria-hidden="true">+</span>
+        </button>
+        <div id="faq-6" class="faq-answer" hidden>
+          <p>Yes. Most modules are designed for flexible online learning, with guidance available depending on the selected support option.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta-section">
+    <h2>Ask about a course or support option</h2>
+    <p>Tell us which subject, module or level of guidance you are considering.</p>
+    <div class="actions">
+      <a class="button primary" href={`${base}contact`}>Contact TableTopLearning</a>
+      <a class="button secondary" href={`${base}modules`}>Explore Modules</a>
+    </div>
+  </section>
+
+  <script>
+    const faqButtons = document.querySelectorAll('[data-faq-toggle]');
+
+    faqButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const item = button.closest('.faq-item');
+        const answer = item?.querySelector('.faq-answer');
+        const isOpen = button.getAttribute('aria-expanded') === 'true';
+
+        if (item && answer instanceof HTMLElement) {
+          item.classList.toggle('is-open', !isOpen);
+          button.setAttribute('aria-expanded', String(!isOpen));
+          answer.hidden = isOpen;
+        }
+      });
+    });
+  </script>
+</Layout>

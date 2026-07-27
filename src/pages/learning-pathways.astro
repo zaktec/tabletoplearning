@@ -1,0 +1,53 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PathwayCard from '../components/PathwayCard.astro';
+import { learningPathways } from '../data/learning';
+
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
+---
+
+<Layout
+  title="Online Learning Pathways"
+  description="Explore structured learning pathways for GCSE Maths preparation, Python Coding, Problem Solving and Artificial Intelligence."
+>
+  <section class="page-intro section">
+    <p class="eyebrow">Learning pathways</p>
+    <h1>Build towards a larger learning goal</h1>
+    <p>Complete short modules in a structured order and progress towards a wider subject or qualification-preparation goal.</p>
+    <div class="actions">
+      <a class="button primary" href="#pathway-list">Explore Pathways</a>
+      <a class="button secondary" href={`${base}modules`}>Browse Modules</a>
+    </div>
+  </section>
+
+  <section id="pathway-list" class="section">
+    <div class="section-heading">
+      <p class="eyebrow">Initial pathways</p>
+      <h2>Choose a pathway that matches your goal</h2>
+      <p>Each pathway groups related modules into a clear example progression.</p>
+    </div>
+
+    <div class="learning-pathway-grid">
+      {learningPathways.map((pathway) => <PathwayCard {...pathway} />)}
+    </div>
+
+    <p class="section-note pathway-note">More learning pathways are coming soon.</p>
+  </section>
+
+  <section class="section qualification-note">
+    <div>
+      <p class="eyebrow">Qualification preparation</p>
+      <h2>Preparation, not qualification awarding</h2>
+      <p>TableTopLearning provides learning and preparation courses. Official qualifications must be taken through an approved examination or assessment centre.</p>
+    </div>
+  </section>
+
+  <section class="section cta-section">
+    <h2>Not sure where to begin?</h2>
+    <p>Tell us which subject or learning goal you are considering.</p>
+    <div class="actions">
+      <a class="button primary" href={`${base}contact`}>Ask About a Pathway</a>
+      <a class="button secondary" href={`${base}modules`}>Explore Modules</a>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,60 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
+const subjects = [
+  {
+    title: 'Computer Science',
+    description: 'Explore programming, computational thinking, algorithms and computer systems.',
+    href: `${base}subjects/computer-science`
+  },
+  {
+    title: 'Python Coding',
+    description: 'Build practical programming skills from foundations through projects and problem solving.',
+    href: `${base}subjects/computer-science`
+  },
+  {
+    title: 'AI & Machine Learning',
+    description: 'Understand artificial intelligence, data and the responsible use of AI tools.',
+    href: `${base}subjects/ai-machine-learning`
+  }
+];
+---
+
+<Layout
+  title="Computing and AI"
+  description="Explore Computer Science, Python Coding and Artificial Intelligence learning from TableTopLearning."
+>
+  <section class="page-intro section">
+    <p class="eyebrow">Subject group</p>
+    <h1>Computing &amp; AI</h1>
+    <p>Choose between Computer Science, practical Python Coding and Artificial Intelligence learning.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <p class="eyebrow">Choose a subject</p>
+      <h2>Build practical digital skills</h2>
+      <p>Start with the subject that best matches your current level or learning goal.</p>
+    </div>
+
+    <div class="card-grid">
+      {subjects.map((subject) => (
+        <a class="card" href={subject.href}>
+          <h3>{subject.title}</h3>
+          <p>{subject.description}</p>
+          <span class="subject-action">Explore subject</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="section cta-section">
+    <h2>Follow a structured pathway</h2>
+    <p>See how Python Coding and Artificial Intelligence modules can build into a wider learning goal.</p>
+    <div class="actions">
+      <a class="button primary" href={`${base}learning-pathways`}>View Learning Pathways</a>
+      <a class="button secondary" href={`${base}modules`}>Explore Modules</a>
+    </div>
+  </section>
+</Layout>

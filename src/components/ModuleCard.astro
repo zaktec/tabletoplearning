@@ -1,0 +1,17 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  pathway: string;
+}
+
+const { title, description, pathway } = Astro.props;
+---
+
+<article class="module-card">
+  <p class="card-label">Example module</p>
+  <h3>{title}</h3>
+  <p>{description}</p>
+  <p class="module-pathway">{pathway}</p>
+  <button class="button secondary" type="button" disabled>View Module</button>
+</article>

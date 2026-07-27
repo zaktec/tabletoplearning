@@ -1,0 +1,28 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  progression: string[];
+  buttonLabel: string;
+  href?: string;
+}
+
+const { title, description, progression, buttonLabel, href } = Astro.props;
+---
+
+<article class="learning-pathway-card">
+  {href ? <p class="card-label">Learning pathway</p> : <span class="pathway-status">Coming soon</span>}
+  <h3>{title}</h3>
+  <p>{description}</p>
+  <p class="progression-label">Example progression</p>
+  <ol class="pathway-progression">
+    {progression.map((step) => <li>{step}</li>)}
+  </ol>
+  {
+    href ? (
+      <a class="button secondary" href={href}>{buttonLabel}</a>
+    ) : (
+      <button class="button secondary" type="button" disabled>{buttonLabel}</button>
+    )
+  }
+</article>

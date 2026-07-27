@@ -1,143 +1,174 @@
-# TableTopLearning Technical Reference and AI Context
+# TableTopLearning Technical AI Document
 
-This document is the canonical technical overview of the repository. It is designed to be supplied to an AI assistant before asking it to analyse or change the app.
+## Document purpose
+
+This is the canonical technical and AI handoff document for the active TableTopLearning web application. It is written for developers, code reviewers, automated tools and AI assistants that need to analyse, maintain or extend the repository safely.
+
+Use this document for architecture, routes, data flow, integrations, implementation rules and development constraints. Use [project-overview.md](project-overview.md) for a non-technical product guide and [branding.md](branding.md) for visual and verbal brand rules.
 
 Last reviewed against the repository: July 2026.
 
-## 1. System summary
+## 1. Application purpose and scope
 
-TableTopLearning is a statically generated Astro website deployed to GitHub Pages. Astro compiles the files in `src/pages/` into HTML and bundles the imported global stylesheet into a hashed asset under `dist/_astro/`.
+TableTopLearning is a public course-discovery and marketing website for structured online learning with tutor support. It helps visitors:
 
-There is no runtime server. Everything deployed is HTML, CSS and a small amount of browser JavaScript.
+- Explore subject areas and learning pathways.
+- Understand how short modules build into larger learning pathways.
+- Read course summaries.
+- Compare Independent Learning, Tutor Guidance and Focused Support plans.
+- Understand the proposed learning experience and tutor support.
+- Read organisational, privacy and safeguarding information.
+- Prepare a course or support enquiry in their own email application.
+
+The deployed product is currently a static website. It is not yet a complete learning platform.
+
+The following capabilities are not implemented:
+
+- Registration, authentication or account recovery.
+- Learner dashboards or saved progress.
+- Hosted lessons, quizzes or course completion.
+- Enrolment, checkout, subscriptions or payment processing.
+- Tutor messaging, scheduling or live lesson delivery.
+- A database, application API, CMS or administrative interface.
+- Server-side contact-form processing.
+
+Never describe a displayed concept as functional unless the repository contains the supporting implementation.
+
+## 2. User roles and permissions
+
+There is no role-based access-control system. The roles below describe audiences, not authenticated technical roles.
+
+| Audience role | Current actions | Current boundaries |
+| --- | --- | --- |
+| Learner | Browse subjects, pathways, course pages, plans and FAQs; prepare an email enquiry | Cannot register, sign in, enrol, pay, access lessons or save progress |
+| Parent or carer | Compare course information and support levels; read policy information; contact the team | Cannot manage a learner account or purchase a plan |
+| General visitor | Read all public pages and follow public navigation | No personalised or private content exists |
+| Content maintainer | Change Astro templates, page copy and in-source course records | No CMS or admin interface; changes require a code deployment |
+| Developer or AI assistant | Maintain the static Astro implementation within repository rules | Must not invent backend capabilities or bypass branding, accessibility and verification rules |
+
+The `/login/` route is an informational placeholder. It does not create a session or accept credentials.
+
+## 3. System architecture
+
+### 3.1 Architecture style
+
+The application uses Astro static-site generation. Source files are compiled into HTML, CSS and small browser-side JavaScript bundles. GitHub Pages serves the generated files without a Node.js server at runtime.
 
 ```text
-Astro source in src/
-        |
-        | npm run build
-        v
-Static files in dist/
-        |
-        | GitHub Actions Pages artifact
-        v
-https://zaktec.github.io/tabletoplearning/
+Astro source and inline content
+            |
+            | npm run build
+            v
+Static HTML, CSS and JavaScript in dist/
+            |
+            | GitHub Actions artifact
+            v
+GitHub Pages and custom domain
+            |
+            v
+https://tabletoplearning.co.uk/
 ```
 
-## 2. Sources of truth
+### 3.2 Runtime request flow
 
-Read these files before making changes:
+```text
+Visitor requests a route
+        |
+        v
+GitHub Pages returns a generated HTML file
+        |
+        +--> Browser loads /_astro/<hashed CSS or JS>
+        |
+        +--> Internal navigation requests another static route
+        |
+        +--> Small local scripts handle menu, FAQ or contact-email behaviour
+```
 
-1. `AGENTS.md` — repository-specific implementation and verification rules.
-2. `docs/branding.md` — mandatory public-facing brand, copy, colour and accessibility rules.
-3. `docs/technical-reference.md` — architecture and current technical behaviour.
-4. The affected source files — code is authoritative if documentation becomes stale.
+No runtime request reaches an application server, database or private API.
 
-Use the brand name exactly as **TableTopLearning** and prefer **learner** over **student** except in an authentic quotation.
+### 3.3 Technology stack
 
-## 3. Technology stack
-
-| Area | Implementation |
+| Area | Current implementation |
 | --- | --- |
 | Framework | Astro 5 |
 | Rendering | Static site generation |
-| Language | Astro templates, TypeScript and browser JavaScript |
-| Styling | One global plain-CSS stylesheet |
+| Templates | `.astro` files |
+| Script language | TypeScript-compatible browser JavaScript |
+| Styling | Plain global CSS |
 | Package manager | npm with `package-lock.json` |
 | CI runtime | Node.js 22 |
-| Hosting | GitHub Pages project site |
+| Hosting | GitHub Pages |
+| Production domain | `https://tabletoplearning.co.uk` |
 | Automation | GitHub Actions |
 | Backend | None |
 | Database | None |
 | CMS | None |
-| Authentication | Placeholder page only |
-| Testing | Astro diagnostics and production build; no unit-test suite |
+| Authentication | None |
+| Automated test suite | None |
+| Required verification | Astro diagnostics and production build |
 
-Dependencies are intentionally small. `astro` is the only runtime dependency. `@astrojs/check` and `typescript` are development dependencies.
+`astro` is the only runtime dependency. `@astrojs/check` and `typescript` are development dependencies.
 
-## 4. Repository map
+## 4. Repository structure and sources of truth
 
 ```text
 .
-├── .github/workflows/deploy.yml  # GitHub Pages CI/CD workflow
-├── AGENTS.md                     # Instructions for coding agents
-├── astro.config.mjs              # Astro site URL and project base path
-├── package.json                  # npm scripts and dependencies
-├── package-lock.json             # Reproducible dependency lock
-├── README.md                     # Entry point for humans and AI tools
+├── .github/workflows/deploy.yml   GitHub Pages build and deployment
+├── AGENTS.md                      Mandatory repository instructions
+├── astro.config.mjs               Astro production-site configuration
+├── package.json                   Commands and dependency declarations
+├── package-lock.json              Reproducible npm dependency lock
+├── README.md                      Repository entry point
 ├── docs/
-│   ├── branding.md               # Public-facing brand rules
-│   ├── project-overview.md       # Product scope and audience
-│   └── technical-reference.md    # This technical source of truth
+│   ├── branding.md                Brand presentation rules
+│   ├── project-overview.md        Human-friendly application guide
+│   └── technical-reference.md     This technical document
 └── src/
     ├── layouts/
-    │   └── Layout.astro          # Shared document, header, nav and footer
-    ├── pages/                    # File-based routes
-    │   ├── courses/[slug].astro  # Statically generated course routes
-    │   └── subjects/*/index.astro# Subject landing pages
-    └── styles/global.css         # All shared styling and responsive rules
+    │   └── Layout.astro           Shared document, header and footer
+    ├── pages/                     File-based routes and inline content
+    │   ├── courses/[slug].astro   Generated course-detail route
+    │   └── subjects/*/index.astro Subject landing pages
+    └── styles/
+        └── global.css             Shared tokens, components and breakpoints
 ```
 
-The root-level `index.html`, `pages/`, `css/`, `scripts/` and `images/` paths are legacy files from an older non-Astro version. They are tracked, but Astro does not import them and the deployment workflow does not publish them. Do not edit them when changing the live Astro site unless the project is intentionally migrating or removing the legacy implementation.
+Read sources in this order before making a change:
 
-Generated directories such as `dist/`, `.astro/` and `node_modules/` are not application source.
+1. `AGENTS.md` for mandatory project rules.
+2. `docs/branding.md` before any public-facing UI, styling, copy, email or brand change.
+3. This document for architecture and implementation boundaries.
+4. The affected source files, which remain authoritative if documentation is stale.
 
-## 5. Architecture
+The root-level `index.html`, `pages/`, `css/`, `scripts/` and `images/` directories belong to an older non-Astro implementation. They are not imported or deployed by the active build. Do not edit them for normal live-site changes.
 
-### File-based routing
+`dist/`, `.astro/` and `node_modules/` are generated or installed artifacts, not application source.
 
-Astro maps files under `src/pages/` to routes. Static pages import and render `src/layouts/Layout.astro`.
+## 5. Routing and page inventory
 
-`src/pages/courses/[slug].astro` is the only dynamic route template. Its `getStaticPaths()` function declares every course slug at build time, so it still produces fully static HTML.
+Astro maps files under `src/pages/` to routes. All production routes are served from the custom-domain root.
 
-### Shared layout
+### 5.1 General pages
 
-`src/layouts/Layout.astro` owns:
-
-- The HTML document shell and English language declaration
-- Viewport and description metadata
-- Page titles in the format `{page title} | TableTopLearning`
-- Sticky site header and primary navigation
-- Responsive navigation toggle
-- Footer navigation and ZakTec Solutions credit
-- Importing `src/styles/global.css`
-
-The layout accepts one optional prop:
-
-```ts
-{
-  title?: string; // defaults to "TableTopLearning"
-}
-```
-
-### Browser-side behaviour
-
-There are two small scripts and no client framework:
-
-1. `Layout.astro` controls the mobile navigation menu. It updates `aria-expanded`, changes the accessible label, toggles `.is-open`, locks body scrolling and closes on link selection, Escape or desktop resize.
-2. `index.astro` controls FAQ disclosures. It toggles the associated answer’s `hidden` state, `.is-open` and `aria-expanded`.
-
-Both interactions rely on the markup, IDs, data attributes and CSS class names remaining aligned.
-
-## 6. Route inventory
-
-All production URLs are served beneath `/tabletoplearning/`.
-
-### General pages
-
-| Route below the base | Source | Purpose |
+| Route | Source | Responsibility |
 | --- | --- | --- |
-| `/` | `src/pages/index.astro` | Homepage, learning pathways, support plans and FAQ |
-| `/about/` | `src/pages/about.astro` | Brand and organisation information |
-| `/contact/` | `src/pages/contact.astro` | Contact email link |
-| `/courses/` | `src/pages/courses.astro` | Small featured-course overview |
-| `/login/` | `src/pages/login.astro` | Placeholder learner-login destination |
-| `/privacy/` | `src/pages/privacy.astro` | Privacy enquiry information |
-| `/safeguarding/` | `src/pages/safeguarding.astro` | Safeguarding contact information |
+| `/` | `src/pages/index.astro` | Concise homepage overview, subject directory and links to detailed sections |
+| `/about/` | `src/pages/about.astro` | Organisation and brand information |
+| `/contact/` | `src/pages/contact.astro` | Full-width contact form that prepares a `mailto:` message |
+| `/courses/` | `src/pages/courses.astro` | Featured course overview |
+| `/modules/` | `src/pages/modules.astro` | Short-module examples and module learning process |
+| `/learning-pathways/` | `src/pages/learning-pathways.astro` | Five initial pathways and example progressions |
+| `/support/` | `src/pages/support.astro` | Tutor guidance, support plans, trust points and FAQs |
+| `/login/` | `src/pages/login.astro` | Clear placeholder for future learner access |
+| `/privacy/` | `src/pages/privacy.astro` | Privacy enquiry guidance |
+| `/safeguarding/` | `src/pages/safeguarding.astro` | Safeguarding contact guidance |
 
-### Subject pages
+### 5.2 Subject pages
 
-Each route is implemented by `src/pages/subjects/<slug>/index.astro`:
+Each subject route is implemented by `src/pages/subjects/<slug>/index.astro`:
 
 - `/subjects/mathematics/`
+- `/subjects/computing-ai/`
 - `/subjects/computer-science/`
 - `/subjects/ai-machine-learning/`
 - `/subjects/english/`
@@ -146,79 +177,155 @@ Each route is implemented by `src/pages/subjects/<slug>/index.astro`:
 - `/subjects/chemistry/`
 - `/subjects/languages/`
 
-### Generated course pages
+The homepage is limited to six cards in this fixed order: Maths, Computing & AI, Science, English, Religion and Languages. Maths and Computing & AI are available; the remaining four are labelled “Coming soon”. Religion and Languages must remain separate and occupy the final two positions.
 
-The following slugs are declared in `getStaticPaths()` and have entries in `courseData`:
+### 5.3 Generated course routes
 
-- `/courses/mathematics/`
-- `/courses/english/`
-- `/courses/languages/`
-- `/courses/biology/`
-- `/courses/ai-machine-learning/`
-- `/courses/computer-science/`
-- `/courses/physics/`
-- `/courses/chemistry/`
-- `/courses/foundations-course/`
-- `/courses/exam-prep-mastery/`
-- `/courses/interactive-practice-lab/`
-- `/courses/advanced-learning-track/`
+`src/pages/courses/[slug].astro` contains `getStaticPaths()` and a `courseData` record. The current generated slugs are:
 
-If a slug is added to `courseData`, it must also be returned by `getStaticPaths()` or Astro will not generate its route. Conversely, every generated slug should have matching course data.
+- `mathematics`
+- `english`
+- `languages`
+- `biology`
+- `ai-machine-learning`
+- `computer-science`
+- `physics`
+- `chemistry`
+- `foundations-course`
+- `exam-prep-mastery`
+- `interactive-practice-lab`
+- `advanced-learning-track`
+
+Every generated slug must have a matching `courseData` entry. Every course that should be reachable in production must be returned by `getStaticPaths()`.
+
+## 6. Shared layout and browser behaviour
+
+### 6.1 `Layout.astro`
+
+All main pages render through `src/layouts/Layout.astro`. It owns:
+
+- The HTML document and `lang="en"`.
+- Character encoding and viewport metadata.
+- The shared description metadata.
+- Titles formatted as `{page title} | TableTopLearning`.
+- The sticky header, brand lockup and primary navigation.
+- Responsive navigation controls.
+- Footer links and the Hai-BL Learning Platform credit.
+- Importing `src/styles/global.css`.
+
+The layout accepts:
+
+```ts
+{
+  title?: string; // Defaults to "TableTopLearning"
+  description?: string; // Defaults to the shared course-discovery description
+}
+```
+
+### 6.2 Browser-side scripts
+
+There is no client framework. Three small scripts provide progressive behaviour:
+
+1. `Layout.astro` controls the mobile menu, `aria-expanded`, accessible labels, body scroll locking, link closing, Escape closing and desktop-resize cleanup.
+2. `support.astro` controls FAQ disclosures by synchronising `hidden`, `.is-open` and `aria-expanded`.
+3. `contact.astro` reads validated form fields and constructs a pre-addressed `mailto:` URL. It does not transmit or store the form data.
+
+Markup IDs, `data-*` attributes, ARIA relationships and CSS state classes form part of each interaction contract. Change them together.
 
 ## 7. Content and data model
 
-There is no central content layer yet.
+The application has no database or central content layer. Content is maintained in source:
 
-- Homepage pathways, subject cards, Python stages, course features, plan details and FAQs are written directly in `src/pages/index.astro`.
-- Each subject page contains a local `courses` array with `title`, `description` and `href` fields.
-- Course detail content is stored in the `courseData` record in `src/pages/courses/[slug].astro`.
-- Contact addresses and policy text are written directly in their page templates.
+- Homepage subject cards, SVG icons and high-level navigation live in `src/pages/index.astro`.
+- Shared module and pathway records live in `src/data/learning.ts`.
+- Detailed module, pathway and support content lives in `src/pages/modules.astro`, `src/pages/learning-pathways.astro` and `src/pages/support.astro`.
+- `src/components/ModuleCard.astro` and `src/components/PathwayCard.astro` own the reusable card markup used by that data.
+- `src/components/archive/homepage/` preserves the pre-module homepage snapshot and must not be imported into the active page.
+- Each subject page contains a local `courses` array with `title`, `description` and `href`.
+- Course-detail content lives in the `courseData` record in `src/pages/courses/[slug].astro`.
+- General page copy and contact addresses live directly in their page templates.
+- Shared navigation and footer labels live in `Layout.astro`.
 
-This means some concepts are duplicated. When changing a subject or course, check all of these locations:
+### 7.1 Content change flow
 
-1. Homepage subject card, pathway or course reference, when applicable
-2. Corresponding subject page and its local course array
-3. `courseData`
-4. `getStaticPaths()`
-5. Navigation or CTA links that point to the route
+```text
+Maintainer edits Astro source
+        |
+        v
+Astro check validates templates and TypeScript
+        |
+        v
+Production build generates routes
+        |
+        v
+GitHub Actions deploys the static artifact
+```
 
-Do not assume the displayed pricing or account copy is backed by business logic. It is static presentation content.
+### 7.2 Duplication rules
 
-## 8. GitHub Pages base-path handling
+Subject and course concepts are duplicated. A subject or course change may require updates to:
 
-`astro.config.mjs` configures a GitHub Pages project site:
+1. Homepage cards or pathways.
+2. The corresponding subject page.
+3. The `courseData` record.
+4. `getStaticPaths()`.
+5. Catalogue, navigation or call-to-action links.
+6. Availability labels and FAQ wording.
+
+Search the repository before assuming one edit is sufficient.
+
+## 8. Integrations and external boundaries
+
+### 8.1 Active integrations
+
+| Integration | Purpose | Data involved |
+| --- | --- | --- |
+| GitHub Actions | Install, build and deploy on pushes to `main` or manual runs | Repository source and generated static artifact |
+| GitHub Pages | Host generated files | Public static files only |
+| Custom domain | Serve the production site at `tabletoplearning.co.uk` | DNS and Pages configuration outside this repository |
+| Visitor email application | Handle contact, privacy and safeguarding messages through `mailto:` | Data remains in the visitor’s email application until they send it |
+
+### 8.2 Integrations that do not exist
+
+There is no analytics platform, cookie-consent platform, CRM, email API, form-processing provider, payment gateway, authentication provider, database, CMS, scheduling service or learning-management integration.
+
+Adding any of these changes privacy, security, operational and testing requirements. Do not add an external service or dependency without an explicit need and justification.
+
+## 9. Production URL and asset handling
+
+`astro.config.mjs` must remain compatible with the custom domain:
 
 ```js
+import { defineConfig } from 'astro/config';
+
 export default defineConfig({
-  site: 'https://zaktec.github.io',
-  base: '/tabletoplearning',
+  site: 'https://tabletoplearning.co.uk',
 });
 ```
 
-The application is not hosted at `/`. A link such as `/about` would incorrectly point to `https://zaktec.github.io/about`.
+There is no project subpath. Internal links and generated assets must resolve from `/`.
 
-Astro files that build internal URLs normalize the configured base to include a trailing slash:
+Existing templates normalise `BASE_URL`:
 
 ```ts
 const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
 ```
 
-Use it like this:
+Valid examples:
 
 ```astro
 <a href={`${base}about`}>About</a>
-<a href={`${base}#learning-pathways`}>Learning Pathways</a>
+<a href={`${base}learning-pathways`}>Learning Pathways</a>
+<a href="/courses">Courses</a>
 ```
 
-For a same-page anchor on the homepage, `href="#learning-pathways"` is also valid. Do not add hard-coded root-relative internal links or assets.
+Imported CSS and Astro bundles are emitted under `/_astro/`. Do not reintroduce `/tabletoplearning/` or the previous GitHub project-site URL.
 
-Astro automatically emits imported CSS under the base path, for example `/tabletoplearning/_astro/<hashed-file>.css`.
+## 10. Styling and component conventions
 
-## 9. Styling system
+All active styling is in `src/styles/global.css`. Reuse existing tokens and patterns before adding new rules.
 
-All active site styles live in `src/styles/global.css`. There is no CSS framework and no component-scoped styling.
-
-The shared design tokens are:
+Core colour tokens:
 
 ```css
 --color-primary: #bd5500;
@@ -233,133 +340,238 @@ The shared design tokens are:
 --color-focus: #7a3d00;
 ```
 
-Important reusable classes include:
+Common reusable patterns:
 
-- Layout: `.topbar`, `.nav-shell`, `.nav-links`, `.footer`
-- Brand: `.brand`, `.brand-mark`, `.brand-text`
-- Content: `.section`, `.section-heading`, `.hero`, `.hero-content`
-- Actions: `.actions`, `.button`, `.primary`, `.secondary`
-- Cards: `.card`, `.subject-card`, `.step-card`, `.testimonial-card`, `.pricing-card`
-- Interactive UI: `.menu-toggle`, `.faq-item`, `.faq-question`, `.faq-answer`
+- Structure: `.section`, `.section-heading`, `.hero`, `.content-panel`.
+- Navigation: `.topbar`, `.nav-shell`, `.nav-links`, `.footer`.
+- Brand: `.brand`, `.brand-mark`, `.brand-text`.
+- Actions: `.actions`, `.button`, `.primary`, `.secondary`.
+- Cards: `.card`, `.subject-card`, `.module-card`, `.learning-pathway-card`, `.pricing-card`.
+- Forms: `.contact-layout`, `.contact-form`, `.form-grid`, `.form-field`.
+- Interactions: `.menu-toggle`, `.faq-item`, `.faq-question`, `.faq-answer`.
 
-Responsive behaviour is primarily defined at `900px` and `560px` breakpoints. At widths of `900px` or below, the primary navigation becomes a toggle-controlled overlay and multi-column layouts collapse. The smallest layout stacks actions and subject cards vertically.
+Primary responsive breakpoints are `900px` and `560px`. Preserve comfortable mobile spacing, one-column fallbacks and the toggle-controlled mobile menu.
 
-The stylesheet includes visible keyboard focus and reduced-motion handling. Preserve these behaviours when changing controls or animation.
+Inline SVG is appropriate for simple interface icons. Decorative icons must use `aria-hidden="true"`. Do not add bitmap assets or dependencies when a small code-native icon is sufficient.
 
-## 10. Accessibility contract
+## 11. Accessibility requirements
 
-The current implementation deliberately includes:
+Accessibility is a required implementation constraint.
 
-- Semantic links and buttons
-- A labelled primary navigation landmark
-- A menu button connected with `aria-controls`
-- Accurate `aria-expanded` state for the menu and FAQs
-- Escape-key menu closing and focus restoration
-- Decorative icons hidden with `aria-hidden="true"`
-- Minimum touch-target sizing
-- Visible `:focus-visible` outlines
-- Sufficient brand-token contrast
-- `prefers-reduced-motion` overrides
+- Use semantic headings in a logical order.
+- Use links for navigation and buttons for actions.
+- Associate every form control with a visible label.
+- Preserve browser validation or provide an accessible equivalent.
+- Maintain visible `:focus-visible` states.
+- Keep touch targets at least 44px high where practical.
+- Keep menu and FAQ `aria-expanded` states accurate.
+- Preserve keyboard interaction and Escape handling.
+- Hide purely decorative icons from assistive technology.
+- Do not communicate availability or state through colour alone.
+- Maintain sufficient colour contrast.
+- Respect `prefers-reduced-motion`.
+- Test desktop and narrow mobile layouts after public-facing changes.
 
-When adding an interactive element, use a real button for an action and a real link for navigation. Do not make a non-interactive element clickable with JavaScript alone.
+## 12. Security and privacy requirements
 
-## 11. Commands
+The static architecture reduces server-side attack surface but does not remove privacy obligations.
+
+- Never place secrets, private keys or service credentials in client-side code.
+- Treat all browser input as untrusted if a backend is added later.
+- Do not claim that the contact form sends or stores data; it only prepares an email.
+- Do not collect fields that are unnecessary for the stated purpose.
+- Do not add tracking, third-party embeds or external form handlers without approval and policy review.
+- Do not expose private learner, parent or tutor information in source files.
+- Authentication, payments and learner records require a secure backend and cannot be simulated with local storage.
+
+## 13. Coding standards and development rules
+
+### 13.1 General rules
+
+- Preserve the existing Astro architecture and static-site compatibility.
+- Work in `src/` for active application changes.
+- Reuse `Layout.astro`, global classes and tokens.
+- Use the brand name exactly as **TableTopLearning**.
+- Prefer **learner** over **student**, except in an authentic quotation.
+- Keep copy concise, accurate and free from unsupported promises.
+- Avoid dependencies unless they are necessary and explicitly justified.
+- Keep changes scoped; do not rebuild unrelated pages or remove course data.
+- Preserve responsive behaviour, keyboard interaction and reduced motion.
+- Keep URLs compatible with the custom-domain root.
+
+### 13.2 Astro and TypeScript rules
+
+- Keep frontmatter at the top of `.astro` files.
+- Type component props and structured records when complexity warrants it.
+- Use `getStaticPaths()` for build-time dynamic routes.
+- Keep generated slugs and their content records synchronised.
+- Prefer native HTML behaviour before adding JavaScript.
+- Keep browser scripts small and page-specific.
+- Query optional DOM elements safely and avoid global state.
+
+### 13.3 CSS rules
+
+- Use existing custom properties rather than hard-coded near-duplicate colours.
+- Extend existing components before introducing a competing pattern.
+- Use mobile-friendly grid fallbacks.
+- Preserve focus, hover and reduced-motion styles.
+- Avoid `!important` unless resolving a documented third-party constraint.
+- Keep selectors understandable and avoid unnecessary specificity.
+
+### 13.4 Content rules
+
+- Verify course availability, pricing and service claims before changing them.
+- Do not invent testimonials, outcomes, qualifications or guarantees.
+- Label placeholders and coming-soon capabilities honestly.
+- Follow [branding.md](branding.md) for tone, vocabulary and presentation.
+
+## 14. Development commands and requirements
+
+Prerequisites:
+
+- Node.js compatible with the CI runtime; Node.js 22 is preferred.
+- npm.
+- A clean install from `package-lock.json`.
 
 | Command | Purpose |
 | --- | --- |
-| `npm ci` | Install exactly what is recorded in `package-lock.json` |
+| `npm ci` | Install the exact locked dependency graph |
 | `npm run dev` | Start the Astro development server |
 | `npm start` | Alias for the development server |
 | `npx astro check` | Run Astro and TypeScript diagnostics |
-| `npm run build` | Generate the production site in `dist/` |
-| `npm run preview` | Preview the production build locally |
+| `npm run build` | Generate production files in `dist/` |
+| `npm run preview` | Preview the generated production build |
 
-For public-facing changes, run at least:
+Minimum verification for public-facing changes:
 
 ```bash
 npx astro check
 npm run build
 ```
 
-When paths or navigation change, inspect the generated HTML or test the production build beneath the configured `/tabletoplearning/` base.
+Also inspect affected interactions and responsive layouts when practical.
 
-## 12. Deployment
+## 15. Deployment
 
-`.github/workflows/deploy.yml` is the only deployment workflow. It runs on pushes to `main` and can also be started manually.
+`.github/workflows/deploy.yml` contains the only deployment workflow.
 
-The workflow:
+Triggers:
 
-1. Checks out the repository.
-2. Sets up Node.js 22 with npm caching.
-3. Configures GitHub Pages.
-4. Runs `npm ci`.
-5. Runs `npm run build`.
-6. Uploads `dist/` as the Pages artifact.
-7. Deploys it with `actions/deploy-pages`.
+- Push to `main`.
+- Manual `workflow_dispatch`.
 
-Required workflow permissions are `contents: read`, `pages: write` and `id-token: write`. The deployment target is the `github-pages` environment.
+Build job:
 
-The repository’s Pages source must be configured to use GitHub Actions. A successful local build does not by itself confirm that repository Pages settings or GitHub Actions permissions are correct.
+1. Check out the repository.
+2. Set up Node.js 22 with npm caching.
+3. Configure GitHub Pages.
+4. Run `npm ci`.
+5. Run `npm run build`.
+6. Upload `dist/` as the Pages artifact.
 
-## 13. Current limitations and technical debt
+Deploy job:
 
-- The login page is informational; it contains no form and performs no authentication.
-- There is no enrolment or payment path behind the pricing cards.
-- There is no persistence, API, database or server-side runtime.
-- Subject and course content is duplicated across templates.
-- `/courses/` contains two generic featured cards and is not a complete catalogue index.
-- “Coming soon” subject pages still link to generic course detail pages.
-- Contact and policy workflows depend on the visitor’s email client through `mailto:` links.
-- No automated unit, integration, end-to-end or accessibility test suite exists.
-- Global CSS and inline page data will become harder to maintain as the catalogue grows.
-- Legacy non-Astro files remain in the repository and can confuse tooling.
+1. Wait for the build job.
+2. Deploy the artifact to the `github-pages` environment.
+3. Publish the deployment URL.
 
-An AI assistant must describe these as current limitations, not as implemented capabilities.
+Required permissions are `contents: read`, `pages: write` and `id-token: write`.
 
-## 14. Safe extension patterns
+Repository Pages settings, custom-domain DNS and certificate state are external operational dependencies. A local build cannot verify them.
 
-### Add a normal static page
+## 16. Testing and acceptance checklist
+
+There is no unit, integration or end-to-end test suite. Use proportionate manual verification.
+
+For every relevant change:
+
+- Run `npx astro check`.
+- Run `npm run build`.
+- Confirm expected routes exist in `dist/`.
+- Check for broken internal links or legacy deployment paths.
+- Test the affected page at desktop and mobile widths.
+- Test keyboard focus and controls.
+- Confirm menu and FAQ ARIA states if those components changed.
+- Confirm form labels, required states and validation if forms changed.
+- Confirm no unapproved external requests or dependencies were introduced.
+- Review copy against the brand guide.
+
+## 17. Safe extension patterns
+
+### Add a static page
 
 1. Create `src/pages/<route>.astro`.
-2. Import and use `Layout`.
-3. Reuse existing global classes and tokens.
-4. Add navigation only if the page belongs in global navigation.
-5. Use the normalized base for cross-page internal links.
-6. Run Astro check and build.
+2. Import and render `Layout`.
+3. Use a specific page title.
+4. Reuse existing content and interface classes.
+5. Add navigation only when the route belongs in global navigation.
+6. Check, build and test the route.
 
 ### Add a subject
 
-1. Add or update its homepage pathway or course reference when it should be promoted there.
-2. Create `src/pages/subjects/<slug>/index.astro` using an existing subject page as the template.
-3. Add corresponding course data and generated paths when applicable.
-4. Ensure status labels accurately reflect availability.
-5. Test every emitted link beneath the project base.
+1. Add or update its homepage card and availability label.
+2. Create `src/pages/subjects/<slug>/index.astro`.
+3. Add matching course data and generated paths where appropriate.
+4. Update related FAQs or pathway copy if necessary.
+5. Test every link to the subject and its courses.
 
-### Add a course slug
+### Add a course route
 
-1. Add a matching key to `courseData`.
-2. Add the same slug to `getStaticPaths()`.
-3. Link to it from the relevant subject page or catalogue.
-4. Build and confirm `dist/courses/<slug>/index.html` exists.
+1. Add a `courseData` entry.
+2. Return the same slug from `getStaticPaths()`.
+3. Link it from the relevant subject or catalogue page.
+4. Build and confirm `dist/courses/<slug>/index.html`.
 
-### Introduce backend functionality
+### Add real form processing
 
-Authentication, payments, forms, progress tracking or a CMS are architectural changes. GitHub Pages cannot run a traditional application server. Such work requires an external API/backend or a hosting-platform change, security and privacy design, secret management, error handling and new testing. Do not simulate these features in the UI and describe them as functional.
+1. Choose an approved backend or form provider.
+2. Define required fields, retention and access.
+3. Add spam protection and server-side validation.
+4. Store credentials outside client code.
+5. Update privacy wording.
+6. Provide success and failure states.
+7. Add automated and manual tests.
 
-## 15. AI handoff checklist
+### Add authentication, payments or progress
 
-Before an AI changes this project, it should be told to:
+Treat these as architecture projects. They require backend services, security design, privacy review, session handling, error recovery, monitoring and expanded testing. Do not implement a visual simulation and call it functional.
 
-- Work only in the active Astro implementation under `src/` unless explicitly asked otherwise.
-- Read `AGENTS.md` and `docs/branding.md` before public-facing changes.
-- Preserve static-site compatibility and the GitHub Pages base path.
-- Reuse the shared layout, CSS tokens and existing class patterns.
-- Keep course route declarations and course data synchronized.
-- Avoid inventing backend capabilities, outcomes, testimonials or legal promises.
-- Preserve keyboard, responsive and reduced-motion behaviour.
-- Avoid new dependencies unless they are necessary and justified.
-- Run `npx astro check` and `npm run build` after relevant changes.
+## 18. Known limitations and technical debt
 
-Suggested context prompt:
+- Login is a placeholder.
+- The contact form depends on the visitor having an email application.
+- Pricing has no checkout or billing integration.
+- Course content is duplicated across templates.
+- Course availability and generated generic course pages are not fully aligned.
+- The courses overview is not a complete searchable catalogue.
+- No CMS or admin workflow exists.
+- No analytics or operational monitoring exists.
+- No automated test suite exists.
+- Global CSS and inline data will become harder to maintain as the application grows.
+- Legacy non-Astro files remain in the repository.
 
-> This repository is the static Astro 5 website for TableTopLearning. Read `AGENTS.md`, `docs/technical-reference.md` and `docs/branding.md` before making changes. Treat `src/` as the active application, preserve the `/tabletoplearning/` GitHub Pages base path, and do not assume authentication, payments, a database, a CMS or course-delivery features exist.
+## 19. AI development protocol
+
+Before changing the repository, an AI assistant must:
+
+1. Read `AGENTS.md`.
+2. Read this document.
+3. Read `docs/branding.md` for public-facing work.
+4. Inspect the relevant source and current working-tree state.
+5. Preserve unrelated user changes.
+6. Make the smallest complete change that satisfies the request.
+7. Verify in proportion to risk.
+8. Report actual behavior and any remaining limitation accurately.
+
+AI assistants must not:
+
+- Infer that placeholder features are implemented.
+- Add external services, dependencies or broad architecture changes without need.
+- Rewrite legacy files instead of the active Astro application.
+- Reintroduce the previous GitHub Pages base path.
+- Invent product claims, learner outcomes or legal assurances.
+- Sacrifice accessibility or mobile behavior for visual convenience.
+
+Suggested handoff prompt:
+
+> This repository contains the static Astro 5 website for TableTopLearning. Read `AGENTS.md`, `docs/technical-reference.md` and `docs/branding.md` before making changes. Treat `src/` as the active application, preserve deployment at the `tabletoplearning.co.uk` domain root, reuse existing patterns, and do not assume authentication, payments, a database, a CMS or hosted course delivery exists.

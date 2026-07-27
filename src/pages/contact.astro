@@ -9,9 +9,70 @@ import Layout from '../layouts/Layout.astro';
       <p>Ask about courses, plans, learner accounts or tutor support.</p>
     </div>
 
-    <div class="card" style="max-width: 720px;">
-      <h2>Email us</h2>
-      <p>Send your question to <a href="mailto:hello@tabletoplearning.com"><strong>hello@tabletoplearning.com</strong></a>.</p>
+    <div class="contact-layout">
+      <form
+        class="card contact-form"
+        action="mailto:hello@tabletoplearning.com"
+        method="post"
+        enctype="text/plain"
+        data-contact-form
+      >
+        <h2>Send an enquiry</h2>
+        <p class="form-intro">Complete the form and we will prepare an email in your email app.</p>
+
+        <div class="form-grid">
+          <label class="form-field">
+            <span>Full name</span>
+            <input type="text" name="name" autocomplete="name" maxlength="100" required />
+          </label>
+
+          <label class="form-field">
+            <span>Email address</span>
+            <input type="email" name="email" autocomplete="email" maxlength="254" required />
+          </label>
+        </div>
+
+        <label class="form-field">
+          <span>What can we help with?</span>
+          <select name="topic" required>
+            <option value="">Choose a topic</option>
+            <option>Course enquiry</option>
+            <option>Plans and pricing</option>
+            <option>Learner account</option>
+            <option>Tutor support</option>
+            <option>Something else</option>
+          </select>
+        </label>
+
+        <label class="form-field">
+          <span>Message</span>
+          <textarea name="message" rows="7" minlength="10" maxlength="2000" required></textarea>
+        </label>
+
+        <p class="form-note">Your details are not stored by this website. Selecting “Prepare email” opens your email app so you can review and send your message.</p>
+        <button class="button primary" type="submit">Prepare email</button>
+      </form>
+
     </div>
   </section>
+
+  <script>
+    const contactForm = document.querySelector<HTMLFormElement>('[data-contact-form]');
+
+    contactForm?.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(contactForm);
+      const name = String(formData.get('name') ?? '');
+      const email = String(formData.get('email') ?? '');
+      const topic = String(formData.get('topic') ?? 'General enquiry');
+      const message = String(formData.get('message') ?? '');
+      const subject = encodeURIComponent(`TableTopLearning enquiry: ${topic}`);
+      const body = encodeURIComponent(
+        `Name: ${name}\nEmail: ${email}\nTopic: ${topic}\n\nMessage:\n${message}`
+      );
+
+      window.location.href = `mailto:hello@tabletoplearning.com?subject=${subject}&body=${body}`;
+    });
+  </script>
 </Layout>

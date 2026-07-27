@@ -1,37 +1,90 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
 ---
 
-<Layout title="About">
-  <section class="section">
-    <h2>About TableTopLearning</h2>
-    <p>TableTopLearning is a warm, modern and education-focused brand that combines approachable design with trusted learning support.</p>
+<Layout
+  title="About"
+  description="Learn how TableTopLearning uses focused modules, structured pathways and clear tutor support to make online learning manageable."
+>
+  <section class="page-intro section">
+    <p class="eyebrow">About TableTopLearning</p>
+    <h1>Learning that feels clear and manageable</h1>
+    <p>TableTopLearning helps learners build skills through short modules, structured learning pathways and tutor guidance where included.</p>
+  </section>
+
+  <section class="section content-panel">
+    <div class="section-heading">
+      <p class="eyebrow">What we do</p>
+      <h2>A clear route from one topic to a wider goal</h2>
+    </div>
+    <p>Learning can feel difficult when it is not clear where to begin or what to study next. TableTopLearning breaks larger subjects into focused modules that can be completed individually or combined into a wider pathway.</p>
+    <p>Initial pathways cover GCSE Foundation Maths, GCSE Higher Maths, Python Coding, Problem Solving and Artificial Intelligence. More subjects and pathways will be added as they are prepared.</p>
   </section>
 
   <section class="section">
-    <h3>Brand personality</h3>
-    <ul>
-      <li>Friendly</li>
-      <li>Encouraging</li>
-      <li>Professional</li>
-      <li>Practical</li>
-      <li>Modern</li>
-    </ul>
+    <div class="section-heading">
+      <p class="eyebrow">Our approach</p>
+      <h2>Practical learning without unnecessary pressure</h2>
+      <p>The aim is to make each next step understandable.</p>
+    </div>
+
+    <div class="benefit-grid">
+      <article>
+        <h3>Focused modules</h3>
+        <p>Each module concentrates on a specific topic or skill.</p>
+      </article>
+      <article>
+        <h3>Clear pathways</h3>
+        <p>Related modules are arranged into a manageable progression.</p>
+      </article>
+      <article>
+        <h3>Honest support</h3>
+        <p>Course and plan pages explain what tutor guidance is included.</p>
+      </article>
+      <article>
+        <h3>Flexible progress</h3>
+        <p>Learners can study online and continue when they are ready.</p>
+      </article>
+    </div>
   </section>
 
   <section class="section">
-    <h3>Design direction</h3>
-    <p>We use warm, soft gradients, rounded cards and a calm layout to keep the experience clear, premium and easy to use.</p>
-    <p>Our copy is clear, encouraging and learner-focused: build skills step by step with the right support at the right time.</p>
+    <div class="section-heading">
+      <p class="eyebrow">Who it is for</p>
+      <h2>Support for different starting points</h2>
+    </div>
+
+    <div class="support-item-grid">
+      <article>
+        <h3>Learners</h3>
+        <p>People who want a clear starting point and a structured way to build skills.</p>
+      </article>
+      <article>
+        <h3>Parents and carers</h3>
+        <p>Families looking for straightforward course information and visible support options.</p>
+      </article>
+      <article>
+        <h3>People returning to learning</h3>
+        <p>Anyone who wants to refresh knowledge or develop a new academic or digital skill.</p>
+      </article>
+    </div>
   </section>
 
-  <section class="section">
-    <h3>Core brand colours</h3>
-    <p>Primary accent: <strong>#bd5500</strong>, supporting background: <strong>#fff8ec</strong>, surface card: <strong>#ffffff</strong> and text: <strong>#594a40</strong>.</p>
+  <section class="section qualification-note">
+    <div>
+      <p class="eyebrow">Clear expectations</p>
+      <h2>Preparation with honest boundaries</h2>
+      <p>TableTopLearning provides learning and qualification-preparation courses. It does not award GCSE qualifications, and official assessments must be taken through an approved examination or assessment centre.</p>
+    </div>
   </section>
 
-  <section class="section">
-    <h3>Logo direction</h3>
-    <p>Use a simple text-based wordmark that is clear and readable. Keep the TTL icon visible but unobtrusive.</p>
+  <section class="section cta-section">
+    <h2>Work with us</h2>
+    <p>If you would like to discuss teaching, learning content, collaboration or another way of working with TableTopLearning, tell us about your idea.</p>
+    <div class="actions">
+      <a class="button primary" href={`${base}contact`}>Contact Us</a>
+    </div>
   </section>
 </Layout>
