@@ -3,8 +3,8 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Contact">
-  <section class="section">
-    <div class="section-heading">
+  <section class="section contact-section">
+    <div class="section-heading contact-heading">
       <h1>Contact TableTopLearning</h1>
       <p>Ask about courses, plans, learner accounts or tutor support.</p>
     </div>
@@ -16,9 +16,11 @@ import Layout from '../layouts/Layout.astro';
         method="post"
         enctype="text/plain"
         data-contact-form
+        data-api-endpoint=""
       >
         <h2>Send an enquiry</h2>
         <p class="form-intro">Complete the form and we will prepare an email in your email app.</p>
+        <p class="form-required-note">All fields are required.</p>
 
         <div class="form-grid">
           <label class="form-field">
@@ -38,7 +40,7 @@ import Layout from '../layouts/Layout.astro';
             <option value="">Choose a topic</option>
             <option>Course enquiry</option>
             <option>Plans and pricing</option>
-            <option>Learner account</option>
+            <option>Learner accounts (coming soon)</option>
             <option>Tutor support</option>
             <option>Something else</option>
           </select>
@@ -49,17 +51,48 @@ import Layout from '../layouts/Layout.astro';
           <textarea name="message" rows="7" minlength="10" maxlength="2000" required></textarea>
         </label>
 
-        <p class="form-note">Your details are not stored by this website. Selecting “Prepare email” opens your email app so you can review and send your message.</p>
-        <button class="button primary" type="submit">Prepare email</button>
+        <p class="form-note" data-form-note>
+          Your details are not stored by this website. Selecting &ldquo;Prepare email&rdquo; opens your email app so you can review and send your message.
+        </p>
+        <p class="form-status" data-form-status aria-live="polite" tabindex="-1"></p>
+        <button class="button primary" type="submit" data-submit-button>Prepare email</button>
       </form>
 
+      <aside class="card contact-details" aria-labelledby="contact-details-heading">
+        <h2 id="contact-details-heading">Other ways to contact us</h2>
+
+        <div class="contact-detail-item">
+          <h3>Email us directly</h3>
+          <p>If the form does not open your email app, write to:</p>
+          <a href="mailto:hello@tabletoplearning.com">hello@tabletoplearning.com</a>
+        </div>
+
+        <div class="contact-detail-item">
+          <h3>When you will hear from us</h3>
+          <p>We aim to reply within two working days.</p>
+        </div>
+
+        <div class="contact-detail-item">
+          <h3>Before you send</h3>
+          <p>Include the course, level or support plan you are asking about. Please do not include sensitive personal information.</p>
+        </div>
+      </aside>
     </div>
   </section>
 
   <script>
     const contactForm = document.querySelector<HTMLFormElement>('[data-contact-form]');
+    const formNote = document.querySelector<HTMLElement>('[data-form-note]');
+    const formStatus = document.querySelector<HTMLElement>('[data-form-status]');
+    const submitButton = document.querySelector<HTMLButtonElement>('[data-submit-button]');
+    const apiEndpoint = contactForm?.dataset.apiEndpoint?.trim() ?? '';
 
-    contactForm?.addEventListener('submit', (event) => {
+    if (apiEndpoint && formNote && submitButton) {
+      formNote.textContent = 'Your details will be sent to TableTopLearning so we can respond to your enquiry.';
+      submitButton.textContent = 'Send enquiry';
+    }
+
+    contactForm?.addEventListener('submit', async (event) => {
       event.preventDefault();
 
       const formData = new FormData(contactForm);
@@ -72,7 +105,54 @@ import Layout from '../layouts/Layout.astro';
         `Name: ${name}\nEmail: ${email}\nTopic: ${topic}\n\nMessage:\n${message}`
       );
 
-      window.location.href = `mailto:hello@tabletoplearning.com?subject=${subject}&body=${body}`;
+      if (!apiEndpoint) {
+        window.location.href = `mailto:hello@tabletoplearning.com?subject=${subject}&body=${body}`;
+        return;
+      }
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending…';
+      }
+
+      if (formStatus) {
+        formStatus.textContent = '';
+        formStatus.className = 'form-status';
+      }
+
+      try {
+        const response = await fetch(apiEndpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({ name, email, topic, message }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Contact request failed with status ${response.status}`);
+        }
+
+        contactForm.reset();
+
+        if (formStatus) {
+          formStatus.textContent = 'Thank you. Your enquiry has been sent.';
+          formStatus.classList.add('is-success');
+          formStatus.focus();
+        }
+      } catch {
+        if (formStatus) {
+          formStatus.textContent = 'We could not send your enquiry. Please email hello@tabletoplearning.com directly.';
+          formStatus.classList.add('is-error');
+          formStatus.focus();
+        }
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Send enquiry';
+        }
+      }
     });
   </script>
 </Layout>

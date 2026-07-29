@@ -2,6 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 
 const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
+
+// Sample figures for layout only. Replace them with verified data before publishing.
+const statistics = [
+  { label: 'Learners supported', value: '250+' },
+  { label: 'Modules completed', value: '600+' },
+  { label: 'Tutor sessions', value: '150+' }
+];
 ---
 
 <Layout
@@ -11,24 +18,25 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
   <section class="hero">
     <div class="hero-content">
       <p class="eyebrow">Online courses with tutor guidance</p>
-      <h1>Build skills through short, focused modules</h1>
-      <p>Learn one topic at a time, build confidence and progress towards a larger learning pathway in Maths, Coding, Problem Solving or AI.</p>
+      <h1>Structured learning with real tutor support</h1>
+      <p>Choose a subject, follow a clear learning pathway and add tutor guidance when you need it.</p>
       <div class="actions">
-        <a class="button primary" href={`${base}modules`}>Explore Modules</a>
-        <a class="button secondary" href={`${base}learning-pathways`}>View Learning Pathways</a>
+        <a class="button primary" href={`${base}courses`}>Explore courses</a>
+        <a class="button secondary" href={`${base}contact`}>Help me choose</a>
       </div>
     </div>
   </section>
 
-  <section id="subjects" class="section">
+  <section id="subjects" class="section section-surface">
     <div class="section-heading">
       <p class="eyebrow">Subject areas</p>
-      <h2>Explore our subject areas</h2>
-      <p>Choose a subject and start with a focused module. Some courses are available now, while more are being prepared.</p>
+      <h2>Choose a subject</h2>
+      <p>Explore available courses before deciding where to begin. Subjects still being prepared are clearly marked as coming soon.</p>
     </div>
 
     <div class="subject-grid">
       <a class="subject-card" href={`${base}subjects/mathematics`} aria-label="Explore Maths course">
+        <span class="subject-status subject-status--available">Available now</span>
         <span class="subject-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M18 5H7l6 7-6 7h11"></path></svg>
         </span>
@@ -38,6 +46,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
       </a>
 
       <a class="subject-card" href={`${base}subjects/computing-ai`} aria-label="Explore Computing and AI courses">
+        <span class="subject-status subject-status--available">Available now</span>
         <span class="subject-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"></path></svg>
         </span>
@@ -87,63 +96,120 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
         <p>Build communication skills and explore how languages connect people and cultures.</p>
       </article>
     </div>
+
+    <div class="section-action subject-directory-action">
+      <p>Not sure which subject or level fits your goal?</p>
+      <a class="button secondary" href={`${base}contact`}>Help me choose</a>
+    </div>
   </section>
 
-  <section class="section">
+  <section class="section statistics-panel" aria-labelledby="statistics-heading">
     <div class="section-heading">
-      <p class="eyebrow">Choose where to begin</p>
-      <h2>A simpler way to explore TableTopLearning</h2>
-      <p>Start with one topic or see how modules connect into a larger learning goal.</p>
+      <p class="eyebrow">Sample statistics</p>
+      <h2 id="statistics-heading">Progress at a glance</h2>
+      <p><strong>Placeholder figures for layout only.</strong> Replace these with verified data before publishing.</p>
     </div>
 
-    <div class="overview-grid">
-      <article class="overview-card">
-        <span class="step-number" aria-hidden="true">1</span>
-        <h3>Short modules</h3>
-        <p>Focus on one skill at a time in Maths, Python, Problem Solving or AI.</p>
-        <a class="button primary" href={`${base}modules`}>Explore Modules</a>
-      </article>
-
-      <article class="overview-card">
-        <span class="step-number" aria-hidden="true">2</span>
-        <h3>Learning pathways</h3>
-        <p>See how related modules build towards a broader subject or preparation goal.</p>
-        <a class="button secondary" href={`${base}learning-pathways`}>View Pathways</a>
-      </article>
+    <div class="statistics-grid">
+      {statistics.map((statistic) => (
+        <article class="statistic-card">
+          <span class="sample-badge">Sample</span>
+          <p class="statistic-value">{statistic.value}</p>
+          <h3>{statistic.label}</h3>
+        </article>
+      ))}
     </div>
   </section>
 
-  <section id="how-it-works" class="section">
+  <section id="how-it-works" class="section section-surface">
     <div class="section-heading">
       <p class="eyebrow">How it works</p>
-      <h2>Learn in manageable stages</h2>
+      <h2>A clear way to learn online</h2>
+      <p>Begin with the right course, work through focused modules and choose the support that fits.</p>
     </div>
 
     <div class="step-list">
       <article class="step-card">
         <span class="step-number" aria-hidden="true">1</span>
-        <h3>Choose a module</h3>
-        <p>Start with a focused topic that matches your current goal.</p>
+        <h3>Choose a course</h3>
+        <p>Start with a subject and level that matches your current goal.</p>
       </article>
       <article class="step-card">
         <span class="step-number" aria-hidden="true">2</span>
-        <h3>Build your pathway</h3>
-        <p>Complete related modules in a clear and manageable order.</p>
+        <h3>Follow the modules</h3>
+        <p>Build skills step by step through lessons and practical activities.</p>
       </article>
       <article class="step-card">
         <span class="step-number" aria-hidden="true">3</span>
-        <h3>Prepare for your next goal</h3>
-        <p>Build skills towards a wider subject or qualification-preparation goal.</p>
+        <h3>Add tutor guidance</h3>
+        <p>Choose independent learning or a plan with more regular tutor support.</p>
       </article>
+    </div>
+
+    <div class="section-action">
+      <a class="button secondary" href={`${base}learning-pathways`}>View learning pathways</a>
     </div>
   </section>
 
-  <section class="section homepage-support">
-    <div>
+  <section class="section section-surface">
+    <div class="section-heading">
       <p class="eyebrow">Tutor support</p>
-      <h2>Choose the guidance that fits</h2>
-      <p>Compare independent learning with options that include more regular tutor guidance.</p>
+      <h2>Choose your level of support</h2>
+      <p>Start independently or add regular tutor guidance for a clearer next step.</p>
     </div>
-    <a class="button secondary" href={`${base}support`}>View Support Options</a>
+
+    <div class="support-preview-grid">
+      <article class="support-preview-card">
+        <p class="pricing-label">Independent Learning</p>
+        <h3>Learn with structure</h3>
+        <p class="support-preview-price">&pound;19<span>/month</span></p>
+        <p>Follow a selected course with weekly lessons, activities and light tutor monitoring.</p>
+      </article>
+      <article class="support-preview-card featured">
+        <p class="pricing-label">Tutor Guidance</p>
+        <h3>Regular guidance</h3>
+        <p class="support-preview-price">&pound;49<span>/month</span></p>
+        <p>Add a monthly live lesson, tutor review and practice shaped around your next steps.</p>
+      </article>
+      <article class="support-preview-card">
+        <p class="pricing-label">Focused Support</p>
+        <h3>Focused preparation</h3>
+        <p class="support-preview-price">&pound;89<span>/month</span></p>
+        <p>Receive more regular tutor contact for a defined topic, project or examination goal.</p>
+      </article>
+    </div>
+
+    <p class="support-preview-note">Plan availability and current terms are confirmed before you start.</p>
+    <div class="section-action">
+      <a class="button secondary" href={`${base}support#pricing`}>Compare support plans</a>
+    </div>
+  </section>
+
+  <section class="section section-surface testimonial-section" aria-labelledby="testimonial-heading">
+    <div class="section-heading">
+      <p class="eyebrow">Sample testimonial</p>
+      <h2 id="testimonial-heading">A learner’s perspective</h2>
+    </div>
+
+    <figure class="testimonial-card testimonial-card--single">
+      <p class="testimonial-placeholder-label">Fictional example</p>
+      <blockquote>
+        “The weekly structure made it easier to know what to study next, and the tutor guidance helped me work through topics I found difficult.”
+      </blockquote>
+      <figcaption><strong>Example learner</strong> · GCSE Maths learner</figcaption>
+    </figure>
+
+    <p class="testimonial-disclaimer">
+      <strong>Design placeholder only.</strong> This is not genuine learner feedback. Replace it with an approved testimonial before publishing.
+    </p>
+  </section>
+
+  <section class="section cta-section">
+    <h2>Not sure where to begin?</h2>
+    <p>Tell us about the subject, level or learning goal you are considering.</p>
+    <div class="actions">
+      <a class="button primary" href={`${base}contact`}>Help me choose</a>
+      <a class="button secondary" href={`${base}courses`}>Explore courses</a>
+    </div>
   </section>
 </Layout>

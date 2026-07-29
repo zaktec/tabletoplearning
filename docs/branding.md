@@ -215,8 +215,8 @@ The current website lockup is rendered with HTML and CSS. Before high-resolution
 
 | Role | Name | Hex | Usage |
 | --- | --- | --- | --- |
-| Primary | TableTop orange | `#bd5500` | Primary buttons, small accents and important active states |
-| Primary hover | Deep orange | `#963f00` | Button hover, strong text links and selected emphasis |
+| Primary | TableTop orange | `#bd5500` | Primary button backgrounds, large accents and important active states |
+| Primary hover | Deep orange | `#963f00` | Button hover, featured or status labels, strong text links and selected emphasis |
 | Canvas | Warm cream | `#fff8ec` | Main page and marketing background |
 | Surface | White | `#ffffff` | Header, footer, cards, forms and content panels |
 
@@ -224,25 +224,49 @@ The current website lockup is rendered with HTML and CSS. Before high-resolution
 
 | Role | Name | Hex | Usage |
 | --- | --- | --- | --- |
-| Soft accent | Pale orange | `#fff3df` | Secondary buttons, icon backgrounds, badges and numbered markers |
+| Soft accent | Pale orange | `#fff3df` | Selected callouts, subtle hover states, icon backgrounds, badges and numbered markers |
 | Heading | Warm charcoal | `#241a14` | Headings and high-emphasis copy |
 | Body text | Brown-grey | `#594a40` | Main body copy |
 | Muted text | Soft brown-grey | `#78695e` | Supporting and explanatory copy |
-| Border | Warm neutral | `#e8d9c7` | Card, field and section borders |
+| Border | Warm neutral | `#e8d9c7` | Card and section borders |
+| Control border | Strong warm neutral | `#aa8f7b` | Form-field and interactive-control boundaries |
 | Focus | Dark amber | `#7a3d00` | Focus indicators and accessible interaction emphasis |
 
 ### Colour usage rules
 
 - Use warm cream for the main canvas.
 - Use white for primary content surfaces.
+- On longer marketing pages, use white content panels with cream space between sections to create a clear reading rhythm.
 - Use orange for important actions and small accents.
 - Use pale orange sparingly for supportive emphasis.
+- Use muted text for ordinary eyebrow labels. Reserve deep orange labels for hero, active, recommended, pricing or status contexts.
 - Use warm charcoal for headings.
 - Use neutral borders by default.
+- Use the stronger control border for form fields and controls that require a visible boundary.
 - Reserve orange borders for hover, focus, selected or recommended states.
+- Use deep orange instead of primary orange for small textual labels on cream or white.
+- Keep the `TTL` mark gradient between primary and deep orange so its white lettering remains legible.
 - Keep large areas calm; orange should guide attention rather than dominate the page.
 - Do not create subject-specific rainbow colours unless a future brand update formally defines them.
 - Never rely on colour alone to communicate availability, errors or selection.
+
+### Visual balance
+
+As a practical starting point for marketing pages, aim for approximately:
+
+- **60% white:** hero panels, major content sections, cards, navigation and footer.
+- **30% warm cream:** the page canvas, spacing between sections and calm supporting areas.
+- **10% orange and pale-orange accents:** primary actions, prices, active or recommended states, icons and selected callouts.
+
+These proportions are guidance rather than a strict measurement. The intended result is bright, warm and easy to scan. Orange should identify priority and interaction; it should not colour every heading, label, border or background.
+
+For a typical homepage:
+
+- Place the hero on a white surface.
+- Use white panels for substantial sections such as subject choice, process guidance and support plans.
+- Let the cream canvas remain visible between panels so the sections do not merge into one continuous white page.
+- Use neutral borders to separate white cards from white section surfaces.
+- Keep pale orange for selected callouts, statistics, badges and small icon containers.
 
 ### CSS source of truth
 
@@ -257,6 +281,7 @@ The current website lockup is rendered with HTML and CSS. Before high-resolution
   --color-text: #594a40;
   --color-text-muted: #78695e;
   --color-border: #e8d9c7;
+  --color-control-border: #aa8f7b;
   --color-focus: #7a3d00;
 }
 ```
@@ -321,8 +346,9 @@ Examples:
 
 Use for useful but lower-priority actions.
 
-- Pale-orange or neutral background.
+- White or neutral background with a neutral border.
 - Deep-orange text.
+- Pale orange may appear on hover or when selected.
 - Same sizing and rounded style as primary buttons.
 
 Examples:
@@ -344,9 +370,20 @@ Examples:
 - Use white surfaces against the cream canvas.
 - Use consistent rounded corners.
 - Keep borders neutral by default.
+- When a white card sits inside a white section, retain a subtle neutral border so its boundary remains clear.
+- Use cream spacing between major white panels instead of adding heavy shadows.
 - Use subtle hover movement only on interactive cards.
 - Keep shadows subtle and uncommon.
 - Avoid turning every piece of content into a separate card.
+
+### Pricing and statistics
+
+- Present prices in warm charcoal with concise supporting terms.
+- Use deep orange for short plan labels and primary orange for a selected or recommended plan border.
+- Highlight no more than one recommended plan in a comparison group.
+- State that availability and current terms are confirmed before a learner starts.
+- Do not publish placeholder statistics as verified outcomes.
+- Placeholder figures may appear in design previews only when the section and every figure are clearly labelled as sample data and include replacement guidance.
 
 ### Forms
 
@@ -365,6 +402,9 @@ Examples:
 - Use short, familiar navigation labels.
 - Keep the most important action visually distinct.
 - Preserve keyboard operation and a clear mobile menu.
+- Keep the primary header focused on **Courses**, **How it works**, **Support** and **Contact**, followed by a distinct **Help me choose** action.
+- Keep detailed destinations such as short modules, individual subjects, policies and safeguarding in the footer rather than crowding the primary navigation.
+- Treat the footer as a concise site directory. It may contain more links than the header, grouped under clear headings.
 
 ## 11. Image, illustration and icon style
 
@@ -434,7 +474,8 @@ Do not use a mix of emoji, filled clip art and outline icons in the same interfa
 - Do not imply that displayed pricing creates a contractual offer.
 - Do not describe the login page as functional.
 - Do not say the contact form sends data directly; it prepares an email.
-- Do not invent tutors, testimonials, statistics, accreditations or outcomes.
+- Do not publish invented tutors, testimonials, statistics, accreditations or outcomes as genuine evidence.
+- Clearly label any temporary statistics used for layout as sample data and replace them with verified figures before publication.
 - Preserve authentic quotations exactly, apart from approved accessibility corrections.
 
 ### Reading level
@@ -602,6 +643,7 @@ Before publishing any public-facing material, confirm:
 - Current and coming-soon features are distinguished.
 - The approved logo arrangement is used correctly.
 - Colours come from the approved palette.
+- White content surfaces, cream spacing and orange accents follow the intended visual balance.
 - Typography is readable and consistent.
 - Buttons describe the actual next action.
 - Images and icons share a coherent style.

@@ -45,7 +45,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
     <div class="section-heading">
       <p class="eyebrow">Support options</p>
       <h2>Choose the level of support you need</h2>
-      <p>Start with independent learning or choose additional tutor guidance.</p>
+      <p>Compare who each option suits, how tutors are involved and what feedback is included.</p>
     </div>
 
     <div class="pricing-grid">
@@ -53,14 +53,26 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
         <p class="pricing-label">Independent Learning</p>
         <h3>Learn with structure</h3>
         <p class="price">&pound;19<span>/month</span></p>
-        <ul>
-          <li>One selected course</li>
-          <li>Weekly lessons and activities</li>
-          <li>Quizzes and progress tracking</li>
-          <li>Light tutor monitoring included</li>
-          <li>Live lessons not included</li>
-        </ul>
-        <a class="button secondary" href={`${base}courses`}>Explore Courses</a>
+        <p class="pricing-copy">One selected course with weekly lessons and activities.</p>
+        <dl class="plan-details">
+          <div>
+            <dt>Who it suits</dt>
+            <dd>Learners who are comfortable following a structured course mostly independently.</dd>
+          </div>
+          <div>
+            <dt>Tutor involvement</dt>
+            <dd>Light tutor monitoring. Live lessons are not included.</dd>
+          </div>
+          <div>
+            <dt>Feedback</dt>
+            <dd>Course quizzes and progress tracking.</dd>
+          </div>
+          <div>
+            <dt>Response time</dt>
+            <dd>Current support response times are confirmed before you start.</dd>
+          </div>
+        </dl>
+        <a class="button secondary" href={`${base}courses`}>Explore courses</a>
       </article>
 
       <article class="pricing-card featured">
@@ -68,28 +80,53 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
         <p class="pricing-label">Tutor Guidance</p>
         <h3>Regular guidance</h3>
         <p class="price">&pound;49<span>/month</span></p>
-        <ul>
-          <li>One selected course and learning activities</li>
-          <li>One live lesson each month</li>
-          <li>Personalised practice</li>
-          <li>Monthly tutor review</li>
-          <li>Priority tutor support not included</li>
-        </ul>
-        <a class="button primary" href={`${base}contact`}>Explore Tutor Guidance</a>
+        <p class="pricing-copy">One selected course with learning activities and regular tutor guidance.</p>
+        <dl class="plan-details">
+          <div>
+            <dt>Who it suits</dt>
+            <dd>Learners who benefit from a regular tutor check-in and help choosing what to practise.</dd>
+          </div>
+          <div>
+            <dt>Tutor involvement</dt>
+            <dd>One live lesson each month and a monthly tutor review.</dd>
+          </div>
+          <div>
+            <dt>Feedback</dt>
+            <dd>Personalised practice based on the monthly review.</dd>
+          </div>
+          <div>
+            <dt>Response time</dt>
+            <dd>Current support response times are confirmed before you start. Priority support is not included.</dd>
+          </div>
+        </dl>
+        <a class="button primary" href={`${base}contact`}>Ask about Tutor Guidance</a>
       </article>
 
       <article class="pricing-card">
         <p class="pricing-label">Focused Support</p>
         <h3>Focused preparation</h3>
         <p class="price">&pound;89<span>/month</span></p>
-        <ul>
-          <li>One selected course and learning activities</li>
-          <li>Two live lessons each month</li>
-          <li>Priority tutor support</li>
-          <li>Personalised learning plan</li>
-          <li>Official examination entry not included</li>
-        </ul>
-        <a class="button secondary" href={`${base}contact`}>Enquire About Support</a>
+        <p class="pricing-copy">One selected course with learning activities and more regular tutor contact.</p>
+        <dl class="plan-details">
+          <div>
+            <dt>Who it suits</dt>
+            <dd>Learners preparing for a defined topic, project or examination goal.</dd>
+          </div>
+          <div>
+            <dt>Tutor involvement</dt>
+            <dd>Two live lessons each month with priority tutor support.</dd>
+          </div>
+          <div>
+            <dt>Feedback</dt>
+            <dd>A personalised learning plan to guide preparation and next steps.</dd>
+          </div>
+          <div>
+            <dt>Response time</dt>
+            <dd>Current priority-support response times are confirmed before you start.</dd>
+          </div>
+        </dl>
+        <p class="plan-limit">Official examination entry is not included.</p>
+        <a class="button secondary" href={`${base}contact`}>Ask about Focused Support</a>
       </article>
     </div>
     <p class="pricing-note">Plan availability and current terms are confirmed before you start.</p>
